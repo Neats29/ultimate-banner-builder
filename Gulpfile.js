@@ -10,7 +10,7 @@ const gulp      = require('gulp'),
     ff          = require('gulp-connect-multi')(),
     safari      = require('gulp-connect-multi')(),
     connect     = require('gulp-connect-multi')(),
-    image       = require('gulp-image'),
+    imagemin    = require('gulp-imagemin'),
     rename      = require('gulp-rename'),
     merge       = require('merge-stream'),
     fs          = require('fs'),
@@ -191,8 +191,20 @@ gulp.task('img', () => {
 
   var copyAndPipe = (gulpSrc, gulpDest) => {
     return gulp.src(gulpSrc)
-     .pipe(image())
-     .pipe(gulp.dest(gulpDest));
+    .pipe(imagemin({
+      // jpg
+      progressive: true,
+
+      // gif
+      interlaced: true,
+
+      // png
+      optimizationLevel: 3,
+
+      // svg
+      multipass: true
+    }))
+    .pipe(gulp.dest(gulpDest));
   };
 
   if (Master && Static && !DoubleClick ||
