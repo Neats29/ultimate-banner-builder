@@ -1,7 +1,6 @@
 "use strict";
 const gulp      = require('gulp'),
     watch       = require('gulp-watch'),
-    //watch = require('gulp-debounced-watch'),
     sass        = require('gulp-sass'),
     cleanCSS    = require('gulp-clean-css'),
     htmlmin     = require('gulp-htmlmin'),
@@ -120,7 +119,7 @@ gulp.task('sass', () => {
       .pipe(sassLint())
       .pipe(sassLint.format())
       .pipe(sassLint.failOnError())
-      //.pipe(uncss({ html: 'index.html' }))
+      //.pipe(uncss({ html: 'index.html' })) //to be uncommented in production
       .pipe(sourcemaps.init())
       .pipe(sass({includePaths: ['src']}).on('error', sass.logError))
       .pipe(cleanCSS())
@@ -304,69 +303,6 @@ gulp.task('master', (callback) => {
     console.info(chalk.yellow("Unable to run this command as 'Master' is false"));
   }
 });
-
-
-//gulp.task('generate', () => {
-  //return shell.task(
-    //'npm run generate'
-  //);
-//});
-
-//gulp.task('all-sizes', (callback) => {
-  //if (!Master) {
-    //runSequence('generate', callback);
-  //}
-//});
-
-
-
-
-//gulp.task('watch-deleted-images', ['img'], function() {
-  //var notDeletedFilter = filter(
-    //function(file) {
-        //return file.event !== 'unlink' && file.event !== 'unlinkDir';
-    //},
-    //{ restore: true }
-  //);
-
-  ////to get the destination:
-  //function getDest(src, dest) {
-    //return dest;
-  //}
-
-  //function watchDeletedImgs(destination) {
-    //notDeletedFilter.restore
-      //.pipe(gulp.dest(destination[0][0]))
-      //.pipe(vinylPaths(del));
-
-    //return watch('src/**/img/*', {events: ['add', 'change', 'unlink', 'unlinkDir']})
-      //.pipe(notDeletedFilter)
-      //.pipe(gulp.dest(destination[0][0]));
-  //}
-
-  //var doubleclickDest = (getSubDirectories('img', getDest, false));
-  //var staticDest =(getSubDirectories('img', getDest, true));
-  //console.log(getSubDirectories('img', getDest, true)[0][0])
-
-  //watchDeletedImgs(doubleclickDest);
-  //watchDeletedImgs(staticDest);
-
-//});
-
-
-//// the way we are getting the destination results in a 2d array, so this function is to turn it into a 1d
-//function getDestForDelImgs(dest2D) {
-  //var arr = [];
-
-  ////dest2D.forEach(function(a){
-  ////console.log("a:",a)
-    ////return a.forEach(function(b){
-      ////arr.push(b);
-    ////});
-  ////});
-
-  ////return arr;
-//}
 
 
 // Setup watch tasks
