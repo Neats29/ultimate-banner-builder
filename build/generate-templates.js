@@ -11,6 +11,7 @@ const Dynamic = null;
 const Static = "static";
 const img = "img";
 var versions;
+let masterScss;
 
 
 // Get folder names inside a given directory (dir)
@@ -28,7 +29,8 @@ class GenerateTemplates {
 		this.loadSizes();
 		this.setupSource();
 
-		this.formatFiles = ['doubleclick.js', 'main.js', 'static.js', 'image-paths.js', 'overwrite.scss'];
+    //TODO: look inside folder rather than array
+		this.formatFiles = ['doubleclick.js', 'main.js', 'static.js', 'image-paths.js', 'overwrite.scss', 'index.html'];
 	}
 
 	loadSizes() {
@@ -39,11 +41,17 @@ class GenerateTemplates {
 		this.Master = sizes.Master;
 		this.Static = sizes.Static;
     this.Dynamic = sizes.Dynamic;
+    this.masterScssCopied = false;
 		versions = sizes.versions;
 		
 		versions = this.Master === true ? [versions[0]] : versions;
 		this.sizes = this.Master === true ? [this.sizes[0]] : this.sizes;
 	}
+
+  isStatic() {
+    if (this.Master && this.Static && !this.DoubleClick ||
+      !this.Master && this.Static) return true;
+  }
 
 	processSizes() {
 		this.sizes.map((size) => {
@@ -114,9 +122,9 @@ class GenerateTemplates {
           fs.mkdir(`${dir}/${DoubleClick}`);
         }
 
-				if (this.Master && this.Static && !this.DoubleClick ||
-						!this.Master && this.Static) {
-					var totalVersions = this.Master === true ? 1 : versions.length
+
+				if (this.isStatic()) {
+					var totalVersions = this.Master === true ? 1 : versions.length;
 					var version = 0;
 
 					// Make Static assets folder
@@ -141,7 +149,7 @@ class GenerateTemplates {
 					function makeImgDirectory (version) {
 						fs.mkdir(`${dir}/${Static}/${versions[version]}/${img}`, function (err) {
 					    if (err) {
-					        return console.log('failed to write directory', err);
+                return console.log('failed to write directory', err);
 					    }
 					    copyImages(version); // Copy global images for this version before incrementing
 
@@ -153,7 +161,7 @@ class GenerateTemplates {
 					    	makeVersionDirectory(version); // Otherwise perform these tasks for each version
 					    }
 						});
-					};
+					}
 
 					// Copy global images into image directory
 					// TODO: allow all images from inside this folder to be copied, regardless of name
@@ -164,8 +172,7 @@ class GenerateTemplates {
 			      	if (err) return console.error("error:", err);
 			      	console.info(chalk.green("static images folder copied successfully."));
 			      });
-					};
-
+					}
 
 	      } else {
 					that.populateTemplate(dir, data); // If static is false, build as normal
@@ -175,8 +182,51 @@ class GenerateTemplates {
 		});
 	}
 
+  // check for numberxnumber-overwite.scss, match the number and overwite the scss 
+  //in that folder, then replace it with the default overwrite.scss in that folder - then delete from base template
+  findEditedMasterScss() {
+    var masterScssRegx = /([0-9]+x[0-9]+)-overwrite\.scss/; 
+    var test = fs.readdirSync('base-template').filter((file) => {
+      if (masterScssRegx.test(file)) {
+        masterScss = file;
+      }
+      return masterScssRegx.test(file);
+    });
+
+    if (test.length) {
+
+      var dash = test[0].indexOf('-');
+      //find out which size folder the edited overwrite.scss file belonged to
+      var masterScssSize = test[0].slice(0, dash);
+      getFolders('src').map((sizeFolder) => {
+        if (sizeFolder === masterScssSize) {
+          return fs.readdirSync(`src/${sizeFolder}/doubleclick`).map((file) => {
+            if (file === 'overwrite.scss') {
+              var stream = fs.createReadStream(`base-template/${masterScss}`);
+              stream.pipe(fs.createWriteStream(`src/${sizeFolder}/doubleclick/${file}`));
+              //var had_error = false;
+              //writeStream.on('error', function(err){
+                //had_error = true;
+              //});
+              //writeStream.on('close', function(){
+                //if (!had_error) fs.unlink(`base-template/${masterScss}`);
+              //});
+            }
+          });
+        }
+      });
+    }
+    //TODO: comment back in once work out how to do the copy and deletion synchronoudly. at the mo, it deltes before it's finished copying sometimes
+    //fs.unlinkSync(`base-template/${masterScss}`); //delete the edited overwrite.scss file afterwards
+  }
+
+
+  findAndDelMasterScss(){
+    this.findEditedMasterScss();
+  }
+
+
 	populateTemplate(dir, data) {
-		fs.createReadStream(`${appRoot}/base-template/index.html`).pipe(fs.createWriteStream(`${dir}/index.html`));
 
     if (!this.Dynamic && this.DoubleClick) {
       fse.copy(`${appRoot}/base-template/global-images`, `${dir}/${DoubleClick}/img`, (err) => {
@@ -189,31 +239,9 @@ class GenerateTemplates {
 			this.formatPopulate(file, data, dir);
 		});
 
+
     if (!this.Master) {
-    // check for numberxnumber-overwite.scss, match the number and overwite the scss 
-    //in that folder, then replace it with the default overwrite.scss in that folder - then delete from base template
-      var masterScssRegx = /([0-9]+x[0-9]+)-overwrite\.scss/; 
-      var masterScss;
-      var test = fs.readdirSync('base-template').filter((file) => {
-        if (masterScssRegx.test(file)) {
-          masterScss = file;
-        }
-        return masterScssRegx.test(file);
-      });
-      if (test.length) {
-        var dash = test[0].indexOf('-');
-        var masterScssSize = test[0].slice(0, dash);
-        getFolders('src').map((sizeFolder) => {
-          if (sizeFolder === masterScssSize) {
-            return fs.readdirSync(`src/${sizeFolder}`).map((size) => {
-              if (size === 'overwrite.scss') {
-                fs.createReadStream(`base-template/${masterScss}`).pipe(fs.createWriteStream(`src/${sizeFolder}/${size}`));
-              }
-            });
-          }
-        });
-        //fs.unlinkSync(`base-template/${masterScss}`); //delete the edited overwrite.scss file afterwards
-      }
+      this.findAndDelMasterScss(data);
     }
 
 	}
@@ -224,36 +252,48 @@ class GenerateTemplates {
 		});
 	}
 
+
 	// Copy files and their contents into their correct subfolders
 	formatPopulate(file, data, dir) {
 
 		let fileData = fs.readFileSync(`${appRoot}/base-template/${file}`, 'utf8');
 		let processedData = this.format(fileData, data);
 
+
 		// Create individual folders for specific js files.
-    switch(file) {
-	    case 'static.js':
-	    		if (this.Master && this.Static && !this.DoubleClick ||
-						!this.Master && this.Static) {
-		        fs.writeFileSync(`${dir}/${file}`, processedData, 'utf8');
-	    		}
-	        break;
-	    case 'image-paths.js':
-	    		if (this.Master && this.Static && !this.DoubleClick ||
-						!this.Master && this.Static) {
-		    		for (var version in versions) {
-			        fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
-		        }
-	    		}
-	        break;
-	    case 'doubleclick.js':
-        if (this.DoubleClick) {
-          fs.writeFileSync(`${dir}/${DoubleClick}/${file}`, processedData, 'utf8');
-        }
-        break;
-	    default:
-        fs.writeFileSync(`${dir}/${file}`, processedData, 'utf8');
-		}
+    if (this.isStatic()) {
+      switch(file) {
+        case 'static.js':
+            fs.writeFileSync(`${dir}/${Static}/${file}`, processedData, 'utf8');
+          break;
+        case 'index.html':
+        case 'overwrite.scss':
+        case 'image-paths.js': 
+          for (var version in versions) {
+            fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
+          }
+          break;
+        case 'main.js':
+            fs.writeFileSync(`${dir}/${file}`, processedData, 'utf8');
+          break;
+        default:
+          //console.log("Unknown file");
+      }
+    }
+    if (this.DoubleClick) {
+      switch(file) {
+        case 'index.html':
+        case 'overwrite.scss':
+        case 'doubleclick.js':
+            fs.writeFileSync(`${dir}/${DoubleClick}/${file}`, processedData, 'utf8');
+          break;
+        case 'main.js':
+            fs.writeFileSync(`${dir}/${file}`, processedData, 'utf8');
+          break;
+        default:
+          //console.log("Unknown file");
+      }
+    }
 	}
 }
 

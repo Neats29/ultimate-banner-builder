@@ -34,7 +34,7 @@
     "gulp-debounced-watch": "^1.0.4",
     "gulp-filter": "^4.0.0",
     "gulp-htmlmin": "^2.0.0",
-    "gulp-image": "^2.0.1",
+    "gulp-imagemin": "^3.0.1",
     "gulp-jshint": "^2.0.1",
     "gulp-remove-code": "^1.0.2",
     "gulp-rename": "^1.2.2",

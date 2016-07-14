@@ -1,25 +1,25 @@
-@import '../global.scss';
-@import '../normalize.scss';
+@import './global.scss';
+@import './normalize.scss';
 
 .banner {
   background-size: 100% 100% !important;
-  height: 600 + px;
-  width: 300 + px;
+  height: {{height}} + px;
+  width: {{width}} + px;
 }
 
 .banner-border {
   position: absolute;
-  height: 600 - 2 + px;
-  width: 300 - 2 + px;
+  height: {{height}} - 2 + px;
+  width: {{width}} - 2 + px;
   border: 1px solid #000;
 }
 
 .full-dimension {
-  height: 600 + px;
-  width: 300 + px;
+  height: {{height}} + px;
+  width: {{width}} + px;
 }
 
 .slide-container {
-  height: 600 + px;
-  width: 300 + px;
+  height: {{height}} + px;
+  width: {{width}} + px;
 }
