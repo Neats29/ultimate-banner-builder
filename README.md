@@ -17,6 +17,7 @@
 - navigate to the project's root directory which contains the file *Gulpfile.js*.
 - run `sudo npm install gulp -g` to ensure you have Gulp installed.
 - run `npm i` to install all necessary packages locally
+- install the [EditorConfig](http://editorconfig.org/) package in your text editor.   
 
 ## 2. Create the Master banner
 ### Configure the *sizes.json* file
