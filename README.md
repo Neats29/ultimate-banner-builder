@@ -23,6 +23,7 @@
 ### Configure the *sizes.json* file
 - `"dimensions"` (array of objects): include an item in the array for each ad size required in the brief. Ensure that the ad size which is declared as the 'Master' in the brief is the 0th item in the array.
 - `"versions"` (array of strings): for non-DoubleClick banners, if there are to be multiple versions of each size (e.g. brand names, differing messages etc.) include an item in the array as a label for each required version.
+- `"Celtra"` (boolean): set to true if the ad is to be served through Celtra Studio
 - `"DoubleClick"` (boolean): set to true if the ad is to be served through DoubleClick Studio
 - `"Dynamic"` (boolean): set to true if the ad is to be serverd using Dynamic Content from DoubleClick Studio
 - `"Static"` (boolean): set to true if the ad is to be served outside of DoubleClick Studio

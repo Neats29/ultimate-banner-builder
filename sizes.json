@@ -19,8 +19,8 @@
     "version2"
   ],
   "DoubleClick" : true,
+  "Celtra" : true,
   "Dynamic" : false,
   "Static" : false,
-  "Celtra" : true,
   "Master" : true
 }
