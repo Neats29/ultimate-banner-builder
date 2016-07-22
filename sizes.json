@@ -20,6 +20,7 @@
   ],
   "DoubleClick" : true,
   "Dynamic" : false,
-  "Static" : true,
+  "Static" : false,
+  "Celtra" : true,
   "Master" : true
 }
