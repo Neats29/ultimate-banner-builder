@@ -18,7 +18,6 @@ const gulp       = require('gulp'),
     removeCode   = require('gulp-remove-code'),
     sourcemaps   = require('gulp-sourcemaps'),
     jshint       = require('gulp-jshint'),
-    //uncss      = require('gulp-uncss'),
     sassLint     = require('gulp-sass-lint'),
     cache        = require('gulp-cache'),
     zip          = require('gulp-zip'),
@@ -124,7 +123,6 @@ gulp.task('sass', () => {
       .pipe(sassLint())
       .pipe(sassLint.format())
       .pipe(sassLint.failOnError())
-      //.pipe(uncss({ html: 'index.html' })) //to be uncommented in production
       .pipe(sourcemaps.init())
       .pipe(sass({includePaths: ['src']}).on('error', sass.logError))
       .pipe(cleanCSS())
