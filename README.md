@@ -1,7 +1,7 @@
 # ultimate-banner-builder
 
 # Features
-- Create any combination of DoubleClick banners, Dynamic DoubleClick banners, and/or non-DoubleClick banners with multiple versions for each ad size. 
+- Create any combination of Celtra and DoubleClick banners, Dynamic DoubleClick banners, and/or non-DoubleClick banners with multiple versions for each ad size. 
 - Create a Master banner version and apply these global changes to all required banner dimensions once completed.
 - Use Gulp to copy all changes in html, js, scss, jpg, and png source files into optimised versions in their relative production folders.
 - Automatically serve the production banners to a localhost in your browser
