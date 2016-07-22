@@ -131,13 +131,6 @@ gulp.task('sass', () => {
 
     var runSass = (ad_type) => {
         return getSubDirectories('scss', copyAndPipe, ad_type);
-        // if (isStatic(ad_type)) {
-        //   return getSubDirectories('scss', copyAndPipe, true);
-        // } else if (ad_type === "doubleclick") {
-        //   return getSubDirectories('scss', copyAndPipe, false);
-        // } else if (ad_type === "celtra") {
-        //   return getSubDirectories('scss', copyAndPipe, "celtra");
-        // }
     };
 
     checkSettingsAndRun(Static, runSass, 'static');

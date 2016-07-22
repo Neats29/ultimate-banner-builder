@@ -5,7 +5,7 @@
 - Create a Master banner version and apply these global changes to all required banner dimensions once completed.
 - Use Gulp to copy all changes in html, js, scss, jpg, and png source files into optimised versions in their relative production folders.
 - Automatically serve the production banners to a localhost in your browser
-- Create javascript files for use in DoubleClick with Enabler and/or static non-DoubleClick versions with pure javascript.
+- Create javascript files for use in DoubleClick with Enabler and/or static non- DoubleClick versions with pure javascript.
 - Use linting tools to check for code quality.
 - Auto zip non-DoubleClick banners according to the banner size.
 
