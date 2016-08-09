@@ -8,6 +8,7 @@ var adContent       = getContent(),
     isImagesLoaded  = false,
     isAnimated      = false;
 
+
 // Set the background images in index.html to those in adContent
 function setImages() {
   var images = [];
@@ -20,6 +21,7 @@ function setImages() {
   }
   imgpreload(images, onImagesLoaded);
 }
+
 
 // Ensure that all images have been downloaded before the animation begins
 function imgpreload(imgs, callback) {
@@ -44,13 +46,14 @@ function imgpreload(imgs, callback) {
   }
 }
 
-// Remobe covering div to reveal ad (called when ready to animate)
+
+// Remove covering div to reveal ad (called when ready to animate).
 function removeCover() {
   document.getElementById('covering-div').className = 'hide';
 }
 
 
-// Called when the ad is visibile in the browser
+// Called when the ad is visibile in the browser.
 function onVisible() {
   isVisible = true;
   if (isImagesLoaded && !isAnimated) {
@@ -60,7 +63,7 @@ function onVisible() {
 }
 
 
-// Called when all images have been downloaded
+// Called when all images have been downloaded.
 function onImagesLoaded() {
   isImagesLoaded = true;
   if (isVisible && !isAnimated) {
@@ -74,7 +77,7 @@ function onImagesLoaded() {
   ONLY EDIT CODE BELOW THIS LINE
 ========================================================================== */
 
-// 1. Update the imageAssignments object below
+// Update the imageAssignments object below.
 // Keys:    ids corresponding to elements in index.html
 // Values:  properties of adContent from getContent() in doubleclick.js (doubleclick banners) or image-paths.js (static banners)
 
@@ -86,7 +89,7 @@ var imageAssignments = {
 };
 
 
-// 1. All banner animations should be set in the animate function. Using TweenLite is recommended.
+// All banner animations should be set in the animate function. Using TweenLite is recommended.
 // TweenLite Documentation: https://www.greensock.com/asdocs/com/greensock/TweenLite.html
 
 function animate() {

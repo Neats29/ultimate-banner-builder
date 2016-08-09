@@ -1,5 +1,5 @@
 function getContent() {
-  /* Create your own version of the below object with local references */
+  // Create your own version of the below object with local references.
 
   var devDynamicContent = {};
   devDynamicContent.Static = [{}];

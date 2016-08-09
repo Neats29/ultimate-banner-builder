@@ -2,7 +2,7 @@
 
 var Enabler;
 
-// Check DoubleClick initializer
+// Check DoubleClick initializer.
 function initialize() {
   if (Enabler.isInitialized()) {
     enablerInitHandler();
@@ -12,7 +12,7 @@ function initialize() {
 }
 
 
-// When Enabler is initialized, check that the page has loaded
+// When Enabler is initialized, check that the page has loaded.
 function checkPageLoaded() {
   if (Enabler.isPageLoaded()) {
     politeInit();
@@ -22,7 +22,7 @@ function checkPageLoaded() {
 }
 
 
-// Attach exit url to bg-exit element
+// Attach exit url to bg-exit element.
 function exitHandler() {
   var dynamicContent = getContent();
   document.getElementById('bg-exit').addEventListener('click', function() {
@@ -50,8 +50,8 @@ function politeInit() {
 ========================================================================== */
 
 function getContent() {
-  /* If using Dynamic Content from DoubleClick Studio, replace this code with Generated Dynamic Code.
-     Otherwise, edit the devDynamicContent object's properties with the relative paths to images. */
+  // If using Dynamic Content from DoubleClick Studio, replace this code with Generated Dynamic Code.
+  // Otherwise, edit the devDynamicContent object's properties with the relative paths to images.
 
   var devDynamicContent = {};
   devDynamicContent.DoubleClick= [{}];
@@ -72,8 +72,8 @@ function getContent() {
   devDynamicContent.DoubleClick[0].exit.Url = "http://www.google.com/";
   Enabler.setDevDynamicContent(devDynamicContent);
 
-  /* End of code to be replaced */
+  // End of code to be replaced
 
-  // If using Dynamic Content from DoubleClick Studio, ensure that the below  variable matches the one in the code directly above.
+  // If using Dynamic Content from DoubleClick Studio, ensure that the below variable matches the one in the code directly above.
   return devDynamicContent.DoubleClick[0];
 }
