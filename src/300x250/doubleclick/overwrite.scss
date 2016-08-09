@@ -6,23 +6,23 @@
 
 .banner {
   background-size: 100% 100% !important;
-  height: calculate-rem({{height}});
-  width: calculate-rem({{width}});
+  height: calculate-rem(250);
+  width: calculate-rem(300);
 }
 
 .banner-border {
   border: calculate-rem(1px) solid $black;
-  height: calculate-rem({{height}} - 2);
+  height: calculate-rem(250 - 2);
   position: absolute;
-  width: calculate-rem({{width}} - 2);
+  width: calculate-rem(300 - 2);
 }
 
 .full-dimension {
-  height: calculate-rem({{height}});
-  width: calculate-rem({{width}});
+  height: calculate-rem(250);
+  width: calculate-rem(300);
 }
 
 .slide-container {
-  height: calculate-rem({{height}});
-  width: calculate-rem({{width}});
+  height: calculate-rem(250);
+  width: calculate-rem(300);
 }

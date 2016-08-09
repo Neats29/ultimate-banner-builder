@@ -2,29 +2,25 @@
   GLOBAL
 ========================================================================== */
 
-img {
-  max-height: 100%;
-  max-width: 100%;
-}
-
 .banner {
-    position: relative;
+  position: relative;
 }
 
 .slide {
   &-container {
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
   }
+
   &-item {
-    width: 100%;
+    background-size: cover !important;
     height: 100%;
-    position: absolute;
-    top: 1;
     left: 0;
     padding: 0;
-    background-size: cover !important;
+    position: absolute;
+    top: 1;
+    width: 100%;
   }
 }
 
