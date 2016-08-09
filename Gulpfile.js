@@ -116,7 +116,9 @@ gulp.task('sass', () => {
 
   var copyAndPipe = (gulpSrc, gulpDest) => {
     return gulp.src(gulpSrc)
-      .pipe(sassLint())
+      .pipe(sassLint({
+        configFile: './sass-lint.yml'
+      }))
       .pipe(sassLint.format())
       .pipe(sassLint.failOnError())
       //.pipe(uncss({ html: 'index.html' })) //to be uncommented in production
@@ -271,7 +273,8 @@ gulp.task('overwrite', () => {
     'src/**/index.html',
     'src/**/main.js',
     'src/global.scss',
-    'src/normalize.scss'
+    'src/normalize.scss',
+    'src/variables.scss'
   ];
   DoubleClick === true ?  sources.push('src/**/doubleclick.js') : sources.push('src/**/image-paths.js');
 

@@ -4,23 +4,23 @@
 
 .banner {
   background-size: 100% 100% !important;
-  height: {{height}} + px;
-  width: {{width}} + px;
+  height: 250 + px;
+  width: 300 + px;
 }
 
 .banner-border {
   border: 1px solid $black;
-  height: {{height}} - 2 + px;
+  height: 250 - 2 + px;
   position: absolute;
-  width: {{width}} - 2 + px;
+  width: 300 - 2 + px;
 }
 
 .full-dimension {
-  height: {{height}} + px;
-  width: {{width}} + px;
+  height: 250 + px;
+  width: 300 + px;
 }
 
 .slide-container {
-  height: {{height}} + px;
-  width: {{width}} + px;
+  height: 250 + px;
+  width: 300 + px;
 }

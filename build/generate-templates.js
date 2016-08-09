@@ -43,7 +43,7 @@ class GenerateTemplates {
     this.Dynamic = sizes.Dynamic;
     this.masterScssCopied = false;
 		versions = sizes.versions;
-		
+
 		versions = this.Master === true ? [versions[0]] : versions;
 		this.sizes = this.Master === true ? [this.sizes[0]] : this.sizes;
 	}
@@ -87,8 +87,10 @@ class GenerateTemplates {
 	populateSrc() {
 		let globalSass = `${appRoot}/base-template/global.scss`;
 		let normalizeSass = `${appRoot}/base-template/normalize.scss`;
+    let variableSass = `${appRoot}/base-template/variables.scss`;
 		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}global.scss`));
 		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}normalize.scss`));
+    fs.createReadStream(variableSass).pipe(fs.createWriteStream(`${sourceDirectory}variables.scss`));
 		this.processSizes();
 	}
 
@@ -182,10 +184,10 @@ class GenerateTemplates {
 		});
 	}
 
-  // check for numberxnumber-overwite.scss, match the number and overwite the scss 
+  // check for numberxnumber-overwite.scss, match the number and overwite the scss
   //in that folder, then replace it with the default overwrite.scss in that folder - then delete from base template
   findEditedMasterScss() {
-    var masterScssRegx = /([0-9]+x[0-9]+)-overwrite\.scss/; 
+    var masterScssRegx = /([0-9]+x[0-9]+)-overwrite\.scss/;
     var test = fs.readdirSync('base-template').filter((file) => {
       if (masterScssRegx.test(file)) {
         masterScss = file;
@@ -268,7 +270,7 @@ class GenerateTemplates {
           break;
         case 'index.html':
         case 'overwrite.scss':
-        case 'image-paths.js': 
+        case 'image-paths.js':
           for (var version in versions) {
             fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
           }
