@@ -1,9 +1,0 @@
-/* ==========================================================================
-  FUNCTIONS
-========================================================================== */
-
-// Convert px values to rem
-@function rem($size) {
-  $rem-size: $size / $default-font-size;
-  @return $rem-size * 1rem;
-}
