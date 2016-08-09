@@ -11,14 +11,16 @@ function initialize() {
   }
 }
 
+
 // When Enabler is initialized, check that the page has loaded
 function checkPageLoaded() {
-  Enabler.isPageLoaded() ? politeInit() :
-    Enabler.addEventListener(
-      studio.events.StudioEvent.PAGE_LOADED,
-      politeInit
-    ); // jshint ignore:line
+  if (Enabler.isPageLoaded()) {
+    politeInit();
+  } else {
+    Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, politeInit);
+  }
 }
+
 
 // Attach exit url to bg-exit element
 function exitHandler() {
@@ -28,13 +30,14 @@ function exitHandler() {
   });
 }
 
+
 // politeInit will run after the page has loaded. Start animations inside this function.
 function politeInit() {
   isVisible = false;
   setImages();
   exitHandler();
 
-  if(Enabler.isVisible()){
+  if(Enabler.isVisible()) {
     onVisible();
   } else {
     Enabler.addEventListener(studio.events.StudioEvent.VISIBLE, onVisible);
@@ -42,9 +45,9 @@ function politeInit() {
 }
 
 
-///
-/*  Only edit code below this line */
-///
+/* ==========================================================================
+  ONLY EDIT CODE BELOW THIS LINE
+========================================================================== */
 
 function getContent() {
   /* If using Dynamic Content from DoubleClick Studio, replace this code with Generated Dynamic Code.
