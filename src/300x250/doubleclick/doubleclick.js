@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 var Enabler;
 
 // Check DoubleClick initializer
@@ -16,7 +17,7 @@ function checkPageLoaded() {
     Enabler.addEventListener(
       studio.events.StudioEvent.PAGE_LOADED,
       politeInit
-    );
+    ); // jshint ignore:line
 }
 
 // Attach exit url to bg-exit element
@@ -46,7 +47,6 @@ function politeInit() {
 ///
 
 function getContent() {
-
   /* If using Dynamic Content from DoubleClick Studio, replace this code with Generated Dynamic Code.
      Otherwise, edit the devDynamicContent object's properties with the relative paths to images. */
 

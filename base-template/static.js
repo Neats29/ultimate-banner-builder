@@ -1,13 +1,15 @@
+'use strict';
+
 // Initialise variables
 var clickTag = "";
 
 // Begin animation after a time delay to allow for loading
 function politeInit() {
-  setTimeout(function() { 
+  setTimeout(function() {
     exitHandler();
     setImages();
   }, 500);
-  setTimeout(function() { 
+  setTimeout(function() {
     removeCover();
     animate();
   }, 1000);

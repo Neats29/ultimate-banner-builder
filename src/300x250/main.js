@@ -1,3 +1,5 @@
+'use strict';
+
 window.onload = initialize();
 
 // Set the content needed to create the banner
@@ -13,10 +15,13 @@ function setImages() {
   var images = [];
 
   for (var image in imageAssignments) {
-    document.getElementById(image).style.background = 'url(' + imageAssignments[image] + ')';
-    images.push(imageAssignments[image]);
+
+    if(imageAssignments.hasOwnProperty(image)) {
+      document.getElementById(image).style.background = 'url(' + imageAssignments[image] + ')';
+      images.push(imageAssignments[image]);
+    }
   }
-  imgpreload(images, onImagesLoaded); 
+  imgpreload(images, onImagesLoaded);
 }
 
 // Ensure that all images have been downloaded before the animation begins
@@ -69,8 +74,8 @@ function onImagesLoaded() {
 
 // 1. Update the imageAssignments object below
 //       Keys:    ids corresponding to elements in index.html
-//       Values:  properties of adContent from getContent() in doubleclick.js (doubleclick banners) 
-//               or image-paths.js (static banners) 
+//       Values:  properties of adContent from getContent() in doubleclick.js (doubleclick banners)
+//               or image-paths.js (static banners)
 
 var imageAssignments = {
   'banner' : adContent.main_image.Url,
