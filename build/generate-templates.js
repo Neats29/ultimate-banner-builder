@@ -84,13 +84,16 @@ class GenerateTemplates {
 		});
 	}
 
+  // TODO: Import all global scss files into src/scss
 	populateSrc() {
-		let globalSass = `${appRoot}/base-template/global.scss`;
-		let normalizeSass = `${appRoot}/base-template/normalize.scss`;
-    let variableSass = `${appRoot}/base-template/variables.scss`;
-		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}global.scss`));
-		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}normalize.scss`));
-    fs.createReadStream(variableSass).pipe(fs.createWriteStream(`${sourceDirectory}variables.scss`));
+		let globalSass = `${appRoot}/base-template/_global.scss`;
+		let normalizeSass = `${appRoot}/base-template/_normalize.scss`;
+    let variableSass = `${appRoot}/base-template/_variables.scss`;
+    let functionSass = `${appRoot}/base-template/_functions.scss`;
+		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}_global.scss`));
+		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}_normalize.scss`));
+    fs.createReadStream(variableSass).pipe(fs.createWriteStream(`${sourceDirectory}_variables.scss`));
+    fs.createReadStream(functionSass).pipe(fs.createWriteStream(`${sourceDirectory}_functions.scss`));
 		this.processSizes();
 	}
 
