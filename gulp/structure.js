@@ -1,44 +1,50 @@
 'use strict';
 
-var _functions = require('./functions.js');
+const _functions  = require('./functions.js'),
+      chalk       = require('chalk'),
+      del         = require('del'),
+      fs          = require('fs'),
+      merge       = require('merge-stream'),
+      merge2      = require('merge2'),
+      path        = require('path'),
+      runSequence = require('run-sequence'),
 
-var gulp = require('gulp'),
-    ff = require('gulp-connect-multi')(),
-    safari = require('gulp-connect-multi')(),
-    connect = require('gulp-connect-multi')(),
-    zip = require('gulp-zip'),
-    rename = require('gulp-rename'),
-    cache = require('gulp-cache'),
-    del = require('del'),
-    merge = require('merge-stream'),
-    merge2 = require('merge2'),
-    runSequence = require('run-sequence'),
-    chalk = require('chalk'),
-    fs = require('fs'),
-    path = require('path');
+      gulp        = require('gulp'),
+      ff          = require('gulp-connect-multi')(),
+      safari      = require('gulp-connect-multi')(),
+      connect     = require('gulp-connect-multi')(),
+      zip         = require('gulp-zip'),
+      rename      = require('gulp-rename'),
+      cache       = require('gulp-cache');
 
-// Setup localhost server to view production files.
-gulp.task('connect', connect.server((0, _functions.connectOptions)('Google Chrome', 8000, 35729))); //default
-gulp.task('ff', ff.server((0, _functions.connectOptions)('firefox', 1337, 35727)));
-gulp.task('safari', safari.server((0, _functions.connectOptions)('safari', 8080, 35722)));
 
 //
 gulp.task('clear', function () {
   cache.clearAll();
 });
 
-// Zip the static folder and zip all individual static banners
-gulp.task('zip', function () {
-  var folders = (0, _functions.getFolders)('prod/static');
-  function applyZip(source, name) {
-    return gulp.src(source).pipe(zip(name + '.zip')).pipe(gulp.dest('zipped-banners'));
-  }
-  applyZip('prod/static/**', 'static');
-  for (var folder in folders) {
-    console.log(folders[folder]);
-    applyZip('prod/static/' + folders[folder] + '/**', folders[folder].toString());
+
+// Setup localhost server to view production files.
+gulp.task('connect', connect.server((0, _functions.connectOptions)('Google Chrome', 8000, 35729))); //default
+gulp.task('ff', ff.server((0, _functions.connectOptions)('firefox', 1337, 35727)));
+gulp.task('safari', safari.server((0, _functions.connectOptions)('safari', 8080, 35722)));
+
+
+//
+gulp.task('del', function () {
+  return del(['src', 'prod']);
+});
+
+//
+gulp.task('master', function (callback) {
+  if (Master) {
+    runSequence('overwrite', 'del', callback);
+    console.info(chalk.green("'src' and 'prod' are successfully deleted. Now change 'Master' to false and run 'npm run generate' and 'gulp'"));
+  } else {
+    console.info(chalk.yellow("Unable to run this command as 'Master' is false"));
   }
 });
+
 
 // Overwrite base-template files with approved Master adjustments
 gulp.task('overwrite', function () {
@@ -55,17 +61,16 @@ gulp.task('overwrite', function () {
   return copyScripts(sources);
 });
 
-//
-gulp.task('del', function () {
-  return del(['src', 'prod']);
-});
 
-//
-gulp.task('master', function (callback) {
-  if (Master) {
-    runSequence('overwrite', 'del', callback);
-    console.info(chalk.green("'src' and 'prod' are successfully deleted. Now change 'Master' to false and run 'npm run generate' and 'gulp'"));
-  } else {
-    console.info(chalk.yellow("Unable to run this command as 'Master' is false"));
+// Zip the static folder and zip all individual static banners
+gulp.task('zip', function () {
+  var folders = (0, _functions.getFolders)('prod/static');
+  function applyZip(source, name) {
+    return gulp.src(source).pipe(zip(name + '.zip')).pipe(gulp.dest('zipped-banners'));
+  }
+  applyZip('prod/static/**', 'static');
+  for (var folder in folders) {
+    console.log(folders[folder]);
+    applyZip('prod/static/' + folders[folder] + '/**', folders[folder].toString());
   }
 });

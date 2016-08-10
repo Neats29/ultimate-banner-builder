@@ -1,11 +1,11 @@
 'use strict';
 
-var _functions = require('./functions.js');
+const _functions = require('./functions.js'),
+      fs         = require('fs'),
 
-var gulp = require('gulp'),
-    removeCode = require('gulp-remove-code'),
-    htmlmin = require('gulp-htmlmin'),
-    fs = require('fs');
+      gulp       = require('gulp'),
+      removeCode = require('gulp-remove-code'),
+      htmlmin    = require('gulp-htmlmin');
 
 // Minimise html files and copy into appropriate folders. Also removes enabler script tag for GDN versions.
 gulp.task('html', function () {

@@ -7,7 +7,6 @@ const gulp       = require('gulp'),
       tasks      = requireDir('./gulp'),
       data       = require('./sizes.json');
 
-
 // Setup watch tasks
 gulp.task('watch', () => {
   gulp.watch('src/**/*.html', ['html']);

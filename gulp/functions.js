@@ -1,36 +1,28 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+const fs          = require('fs'),
+      src         = 'src',
+      path        = require('path'),
+      folders     = getFolders(src),
+      gulp        = require('gulp'),
+      filter      = require('gulp-filter'),
+
+      appRoot     = exports.appRoot = process.cwd(),
+      sizesFile   = exports.sizesFile = fs.readFileSync(appRoot + '/sizes.json', 'utf8'),
+      sizes       = exports.sizes = JSON.parse(sizesFile),
+      DoubleClick = exports.DoubleClick = sizes.DoubleClick,
+      Dynamic     = exports.Dynamic = sizes.Dynamic,
+      Master      = exports.Master = sizes.Master,
+      Static      = exports.Static = sizes.Static,
+      sizeFolder  = exports.sizeFolder = sizes.sizeFolder;
+
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFolders = getFolders;
 exports.checkSettingsAndRun = checkSettingsAndRun;
 exports.isStatic = isStatic;
 exports.getSubDirectories = getSubDirectories;
 exports.connectOptions = connectOptions;
 
-var gulp = require('gulp'),
-    filter = require('gulp-filter'),
-    fs = require('fs'),
-    src = 'src',
-    path = require('path'),
-    folders = getFolders(src);
-
-var appRoot = exports.appRoot = process.cwd();
-var sizesFile = exports.sizesFile = fs.readFileSync(appRoot + '/sizes.json', 'utf8');
-var sizes = exports.sizes = JSON.parse(sizesFile);
-var DoubleClick = exports.DoubleClick = sizes.DoubleClick;
-var Dynamic = exports.Dynamic = sizes.Dynamic;
-var Master = exports.Master = sizes.Master;
-var Static = exports.Static = sizes.Static;
-var sizeFolder = exports.sizeFolder = sizes.sizeFolder;
-
-// Get folder names inside a given directory (dir)
-function getFolders(dir) {
-  return fs.readdirSync(dir).filter(function (file) {
-    return fs.statSync(path.join(dir, file)).isDirectory();
-  });
-}
 
 //
 function checkSettingsAndRun(setting, execute, usingPath) {
@@ -39,13 +31,37 @@ function checkSettingsAndRun(setting, execute, usingPath) {
   }
 }
 
+
+// Open in browsers.
+function connectOptions(browser, port, live) {
+  return {
+    root: ['./prod/'],
+    port: port,
+    livereload: {
+      port: live
+    },
+    open: {
+      browser: browser
+    }
+  };
+}
+
+
+// Get folder names inside a given directory (dir).
+function getFolders(dir) {
+  return fs.readdirSync(dir).filter(function (file) {
+    return fs.statSync(path.join(dir, file)).isDirectory();
+  });
+}
+
+
 //
 function isStatic(ad) {
   if (ad === 'static' && Master && Static && !DoubleClick || ad === 'static' && !Master && Static) return true;
 }
 
-// Loop through the folders to get to the right sub-directories and apply their custom copy tasks to them
 
+// Loop through the folders to get to the right sub-directories and apply their custom copy tasks to them.
 function getSubDirectories(fileType, copyFunc, Static) {
   return folders.map(function (sizeFolder) {
     var ad;
@@ -66,18 +82,4 @@ function getSubDirectories(fileType, copyFunc, Static) {
       return copyFunc(source, dest);
     }
   });
-}
-
-// Open in browsers
-function connectOptions(browser, port, live) {
-  return {
-    root: ['./prod/'],
-    port: port,
-    livereload: {
-      port: live
-    },
-    open: {
-      browser: browser
-    }
-  };
 }

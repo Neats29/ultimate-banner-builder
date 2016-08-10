@@ -1,17 +1,17 @@
 'use strict';
 
-var _functions = require('./functions.js');
+const _functions  = require('./functions.js'),
+      Static      = (0, _functions.Static),
+      DoubleClick = (0, _functions.DoubleClick),
+      sizeFolder  = (0, _functions.sizeFolder),
 
-var gulp = require('gulp'),
-    jshint = require('gulp-jshint'),
-    sourcemaps = require('gulp-sourcemaps'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename');
+      gulp        = require('gulp'),
+      concat      = require('gulp-concat'),
+      jshint      = require('gulp-jshint'),
+      rename      = require('gulp-rename'),
+      sourcemaps  = require('gulp-sourcemaps'),
+      uglify      = require('gulp-uglify');
 
-var Static = (0, _functions.Static);
-var DoubleClick = (0, _functions.DoubleClick);
-var sizeFolder = (0, _functions.sizeFolder);
 
 // Combine various javascript files and minimise them before copying into relevant production folders.
 gulp.task('scripts', function () {
