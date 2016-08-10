@@ -9,7 +9,7 @@
     "js": {
       "src": "./src/**/*.js",
       "all": "./**/*.js",
-      "config": "./config/.jshintrc"
+      "config": "./.jshintrc"
     },
 
     "scss": {
