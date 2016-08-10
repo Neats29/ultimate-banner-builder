@@ -19,19 +19,16 @@ const _functions    = require('./functions.js'),
 gulp.task('img', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
-    return gulp.src(gulpSrc).pipe(imagemin({
-      // jpg
-      progressive: true,
+    return gulp.src(gulpSrc)
+      .pipe(imagemin({
 
-      // gif
-      interlaced: true,
+        progressive: true,    // jpg
+        interlaced: true,     // gif
+        optimizationLevel: 3, // png
+        multipass: true       // svg
 
-      // png
-      optimizationLevel: 3,
-
-      // svg
-      multipass: true
-    })).pipe(gulp.dest(gulpDest));
+      }))
+    .pipe(gulp.dest(gulpDest));
   };
 
   if (Master && Static && !DoubleClick || !Master && Static) {
@@ -44,17 +41,25 @@ gulp.task('img', function () {
 });
 
 
-// Convert scss to css, minimise and copy into appropriate production folders
+// Convert scss to css, minimise and copy into appropriate production folders.
+// Uncss pipe to be uncommented in production.
 gulp.task('sass', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
-    return gulp.src(gulpSrc).pipe(autoprefixer({
-      browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
-    })).pipe(sassLint({
-      configFile: './sass-lint.yml'
-    })).pipe(sassLint.format()).pipe(sassLint.failOnError())
-    //.pipe(uncss({ html: 'index.html' })) //to be uncommented in production
-    .pipe(sourcemaps.init()).pipe(sass({ includePaths: ['src'] }).on('error', sass.logError)).pipe(cleanCSS()).pipe(sourcemaps.write()).pipe(gulp.dest(gulpDest));
+    return gulp.src(gulpSrc)
+      .pipe(autoprefixer({
+        browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
+      }))
+      .pipe(sassLint({
+        configFile: './sass-lint.yml'
+      }))
+      .pipe(sassLint.format()).pipe(sassLint.failOnError())
+      //.pipe(uncss({ html: 'index.html' }))
+      .pipe(sourcemaps.init())
+      .pipe(sass({ includePaths: ['src'] }).on('error', sass.logError))
+      .pipe(cleanCSS())
+      .pipe(sourcemaps.write())
+    .pipe(gulp.dest(gulpDest));
   };
 
   var runSass = function runSass(ad_type) {

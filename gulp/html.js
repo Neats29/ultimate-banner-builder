@@ -11,7 +11,15 @@ const _functions = require('./functions.js'),
 gulp.task('html', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest, Static) {
-    return Static ? gulp.src(gulpSrc).pipe(removeCode({ Static: true })).pipe(htmlmin({ collapseWhitespace: true })).pipe(gulp.dest(gulpDest)) : gulp.src(gulpSrc).pipe(htmlmin({ collapseWhitespace: true })).pipe(gulp.dest(gulpDest));
+    return Static ?
+    gulp.src(gulpSrc)
+      .pipe(removeCode({ Static: true }))
+      .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest(gulpDest))
+
+    :gulp.src(gulpSrc)
+      .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest(gulpDest));
   };
 
   var runHtml = function runHtml(ad_type) {

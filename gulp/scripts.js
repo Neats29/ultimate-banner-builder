@@ -17,7 +17,13 @@ const _functions  = require('./functions.js'),
 gulp.task('scripts', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
-    return gulp.src(gulpSrc).pipe(jshint()).pipe(jshint.reporter('jshint-stylish')).pipe(sourcemaps.init()).pipe(concat(sizeFolder + '.js')).pipe(uglify()).pipe(rename('ad.js')).pipe(sourcemaps.write()).pipe(gulp.dest(gulpDest));
+    return gulp.src(gulpSrc)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(sourcemaps.init()).pipe(concat(sizeFolder + '.js'))
+    .pipe(uglify())
+    .pipe(rename('ad.js'))
+    .pipe(sourcemaps.write()).pipe(gulp.dest(gulpDest));
   };
 
   var runJS = function runJS(ad_type) {

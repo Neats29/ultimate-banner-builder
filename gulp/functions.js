@@ -24,7 +24,6 @@ exports.getSubDirectories = getSubDirectories;
 exports.connectOptions = connectOptions;
 
 
-//
 function checkSettingsAndRun(setting, execute, usingPath) {
   if (setting) {
     execute(usingPath);
@@ -55,7 +54,6 @@ function getFolders(dir) {
 }
 
 
-//
 function isStatic(ad) {
   if (ad === 'static' && Master && Static && !DoubleClick || ad === 'static' && !Master && Static) return true;
 }
@@ -72,13 +70,25 @@ function getSubDirectories(fileType, copyFunc, Static) {
       return typeFolder.map(function (versionFolder) {
         var srcSizeAdVersion = src + '/' + sizeFolder + '/' + ad + '/' + versionFolder;
         var dest = 'prod/' + ad + '/' + sizeFolder + '-' + versionFolder;
-        var source = fileType === 'scss' ? [srcSizeAdVersion + '/*.' + fileType, '!src/*.scss'] : fileType === 'html' ? srcSizeAdVersion + '/*.' + fileType : fileType === 'img' ? [srcSizeAdVersion + '/**/*', '!' + srcSizeAdVersion + '/*.js', '!' + srcSizeAdVersion + '/*.html', '!' + srcSizeAdVersion + '/*.scss'] : fileType === 'js' ? [src + '/' + sizeFolder + '/*.' + fileType, srcSizeAd + '/*.' + fileType, srcSizeAdVersion + '/*.' + fileType] : false;
+        var source = fileType === 'scss' ?
+        [srcSizeAdVersion + '/*.' + fileType, '!src/*.scss'] :
+        fileType === 'html' ? srcSizeAdVersion + '/*.' + fileType :
+        fileType === 'img' ? [srcSizeAdVersion + '/**/*', '!' + srcSizeAdVersion + '/*.js', '!' + srcSizeAdVersion + '/*.html', '!' + srcSizeAdVersion + '/*.scss'] :
+        fileType === 'js' ? [src + '/' + sizeFolder + '/*.' + fileType, srcSizeAd + '/*.' + fileType, srcSizeAdVersion + '/*.' + fileType] :
+        false;
+
         return copyFunc(source, dest, path);
       });
     } else {
       ad = 'doubleclick';
       var dest = 'prod/' + ad + '/' + sizeFolder;
-      var source = fileType === 'js' ? [path.join(src, sizeFolder, '/**/' + ad + '.js'), path.join(src, sizeFolder, '/**/main.js')] : fileType === 'img' ? [path.join(src, sizeFolder, ad, '/**/img/*'), path.join(src, sizeFolder, ad, '/**/img/*')] : fileType === 'scss' ? [src + '/' + sizeFolder + '/' + ad + '/*.scss', '!' + src + '/*.scss'] : fileType === 'html' ? src + '/' + sizeFolder + '/' + ad + '/*.html' : false;
+      var source = fileType === 'js' ?
+      [path.join(src, sizeFolder, '/**/' + ad + '.js'), path.join(src, sizeFolder, '/**/main.js')] :
+      fileType === 'img' ? [path.join(src, sizeFolder, ad, '/**/img/*'), path.join(src, sizeFolder, ad, '/**/img/*')] :
+      fileType === 'scss' ? [src + '/' + sizeFolder + '/' + ad + '/*.scss', '!' + src + '/*.scss'] :
+      fileType === 'html' ? src + '/' + sizeFolder + '/' + ad + '/*.html' :
+      false;
+
       return copyFunc(source, dest);
     }
   });
