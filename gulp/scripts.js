@@ -11,7 +11,9 @@ const _functions  = require('./functions.js'),
       jshint      = require('gulp-jshint'),
       rename      = require('gulp-rename'),
       sourcemaps  = require('gulp-sourcemaps'),
-      uglify      = require('gulp-uglify');
+      uglify      = require('gulp-uglify'),
+      plumber     = require('gulp-plumber'),
+      newer       = require('gulp-newer');
 
 
 // Combine various javascript files and minimise them before copying into relevant production folders.
@@ -19,6 +21,8 @@ gulp.task('scripts', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
     return gulp.src(gulpSrc)
+    .pipe(plumber())
+    .pipe(newer(gulpDest))
     .pipe(sourcemaps.init()).pipe(concat(sizeFolder + '.js'))
     .pipe(uglify())
     .pipe(rename('ad.js'))
@@ -37,7 +41,7 @@ gulp.task('scripts', function () {
   (0, _functions.checkSettingsAndRun)(DoubleClick, runJS, 'doubleclick');
 });
 
-
+// Javascript Lint
 gulp.task('js-lint', function () {
   return gulp.src(_config.paths.js.src)
     .pipe(jshint())

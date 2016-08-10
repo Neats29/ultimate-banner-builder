@@ -9,7 +9,8 @@ const _functions = require('./functions.js'),
       htmlmin    = require('gulp-htmlmin'),
       htmllint   = require('gulp-htmllint'),
       gutil      = require('gulp-util'),
-      newer      = require('gulp-newer');
+      newer      = require('gulp-newer'),
+      plumber    = require('gulp-plumber');
 
 
 // Minimise html files and copy into appropriate folders. Also removes enabler script tag for GDN versions.
@@ -18,12 +19,14 @@ gulp.task('html', function () {
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest, Static) {
     return Static ?
     gulp.src(gulpSrc)
+      .pipe(plumber())
       .pipe(removeCode({ Static: true }))
       .pipe(newer(gulpDest))
       .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest(gulpDest)) :
 
     gulp.src(gulpSrc)
+      .pipe(plumber())
       .pipe(newer(gulpDest))
       .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest(gulpDest));

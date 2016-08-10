@@ -13,7 +13,9 @@ const _functions    = require('./functions.js'),
       imagemin      = require('gulp-imagemin'),
       sass          = require('gulp-sass'),
       sassLint      = require('gulp-sass-lint'),
-      sourcemaps    = require('gulp-sourcemaps');
+      sourcemaps    = require('gulp-sourcemaps'),
+      plumber       = require('gulp-plumber'),
+      newer         = require('gulp-newer');
 
 
 // Optimise and copy images across into production static folders
@@ -21,6 +23,7 @@ gulp.task('img', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
     return gulp.src(gulpSrc)
+      .pipe(plumber())
       .pipe(imagemin({
 
         progressive: true,    // jpg
@@ -48,6 +51,8 @@ gulp.task('sass', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
     return gulp.src(gulpSrc)
+      .pipe(newer(gulpDest))
+      .pipe(plumber())
       .pipe(autoprefixer({
         browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
       }))
@@ -74,7 +79,7 @@ gulp.task('sass', function () {
 
 // Scss Linting
 gulp.task('sass-lint', function () {
-  return gulp.src(_config.paths.scss.src)
+  return gulp.src([_config.paths.scss.src, _config.paths.scss.ignore])
     .pipe(sassLint({
       configFile: _config.paths.scss.config
     }))

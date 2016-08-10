@@ -21,7 +21,7 @@ function checkPageLoaded() {
   }
 }
 
-
+test
 // Attach exit url to bg-exit element.
 function exitHandler() {
   var dynamicContent = getContent();

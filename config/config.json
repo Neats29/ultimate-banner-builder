@@ -15,8 +15,9 @@
     "scss": {
       "src": "./src/**/*.scss",
       "all": "./**/*.scss",
+      "ignore": "!./src/_scss/_trumps.helpers.scss",
       "config": "./config/sass-lint.yml"
-    }
+    },
 
     "img": {
       "src": ["src/**/img", "src/**/img/*"]
