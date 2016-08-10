@@ -48,8 +48,9 @@ class GenerateTemplates {
 	}
 
   isStatic() {
-    if (this.Master && this.Static && !this.DoubleClick ||
-      !this.Master && this.Static) return true;
+    if (this.Master && this.Static && !this.DoubleClick || !this.Master && this.Static) {
+      return true;
+    }
   }
 
 	processSizes() {
@@ -162,7 +163,7 @@ class GenerateTemplates {
 
 					    version++;
 
-					    if (version == totalVersions) {
+					    if (version === totalVersions) {
 					    	that.populateTemplate(dir, data); // Build files into folders when complete
 					    } else {
 					    	makeVersionDirectory(version); // Otherwise perform these tasks for each version
@@ -176,8 +177,11 @@ class GenerateTemplates {
 						var images = ['blue.jpg', 'green.jpg', 'orange.jpg', 'red.jpg'];
 
 						fse.copy(`${appRoot}/base-template/global-images`, `${dir}/${Static}/${versions[version]}/${img}`, (err) => {
-			      	if (err) return console.error("error:", err);
-			      	console.info(chalk.green("static images folder copied successfully."));
+			      	if (err) {
+                return console.error("error:", err);
+              }
+
+              console.info(chalk.green("static images folder copied successfully."));
 			      });
 					}
 
@@ -237,8 +241,10 @@ class GenerateTemplates {
 
     if (!this.Dynamic && this.DoubleClick) {
       fse.copy(`${appRoot}/base-template/global-images`, `${dir}/${DoubleClick}/img`, (err) => {
-       if (err) return console.error("error:", err);
-       console.info(chalk.green("images folder copied successfully."));
+        if (err) {
+          return console.error("error:", err);
+        }
+        console.info(chalk.green("images folder copied successfully."));
       });
     }
 
@@ -277,7 +283,9 @@ class GenerateTemplates {
         case 'overwrite.scss':
         case 'image-paths.js':
           for (var version in versions) {
-            fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
+            if(versions.hasOwnProperty(version)) {
+              fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
+            }
           }
           break;
         case 'main.js':

@@ -9,6 +9,7 @@
     "js": {
       "src": "./src/**/*.js",
       "all": "./**/*.js",
+      "lint": ["./**/*.js", "!./prod/**/*.js", "!./node_modules/**/*.js"],
       "config": "./.jshintrc"
     },
 

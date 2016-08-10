@@ -50,7 +50,7 @@ gulp.task('html-lint', function() {
   return gulp.src(_config.paths.html.src)
     .pipe(htmllint({
       config: _config.paths.html.config
-    }, htmllintReporter))
+    }, htmllintReporter));
 });
 
 

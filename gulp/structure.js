@@ -72,7 +72,9 @@ gulp.task('zip', function () {
 
   applyZip('prod/static/**', 'static');
   for (var folder in folders) {
-    console.log(folders[folder]);
-    applyZip('prod/static/' + folders[folder] + '/**', folders[folder].toString());
+    if(folders.hasOwnProperty(folder)) {
+      console.log(folders[folder]);
+      applyZip('prod/static/' + folders[folder] + '/**', folders[folder].toString());
+    }
   }
 });

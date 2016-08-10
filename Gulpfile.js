@@ -3,8 +3,8 @@
 const _config    = require('./config/config.json'),
       data       = require('./sizes.json'),
       requireDir = require('require-dir'),
-      tasks      = requireDir('./gulp'),
 
+      tasks      = requireDir('./gulp'),
       gulp       = require('gulp'),
       watch      = require('gulp-watch'),
       guppy      = require('git-guppy')(gulp);

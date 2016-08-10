@@ -60,7 +60,9 @@ function getFolders(dir) {
 
 
 function isStatic(ad) {
-  if (ad === 'static' && Master && Static && !DoubleClick || ad === 'static' && !Master && Static) return true;
+  if (ad === 'static' && Master && Static && !DoubleClick || ad === 'static' && !Master && Static) {
+    return true;
+  }
 }
 
 

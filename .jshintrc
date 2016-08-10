@@ -32,7 +32,7 @@
   "boss"          : false,     // true: Tolerate assignments where comparisons would be expected
   "debug"         : false,     // true: Allow debugger statements e.g. browser breakpoints.
   "eqnull"        : false,     // true: Tolerate use of `== null`
-  "esversion"     : 5,         // {int} Specify the ECMAScript version to which the code must adhere.
+  "esversion"     : 6,         // {int} Specify the ECMAScript version to which the code must adhere.
   "moz"           : false,     // true: Allow Mozilla specific syntax (extends and overrides esnext features)
   "evil"          : false,     // true: Tolerate use of `eval` and `new Function()`
   "expr"          : false,     // true: Tolerate `ExpressionStatement` as Programs
@@ -86,6 +86,9 @@
     "getContent": true,
     "TweenLite": true,
     "removeCover": true,
-    "animate": true
+    "animate": true,
+    "require": true,
+    "exports": true,
+    "process": true
   }
 }
