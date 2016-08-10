@@ -19,7 +19,8 @@
 
 .full-dimension {
   height: calculate-rem(250);
-  width: calculate-rem(300) !important;
+  width: calculate-rem(300);
+  width: calculate-rem(200);
 }
 
 .slide-container {
