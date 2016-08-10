@@ -17,15 +17,6 @@ var gulp = require('gulp'),
     fs = require('fs'),
     path = require('path');
 
-var appRoot = process.cwd();
-var sizesFile = fs.readFileSync(appRoot + '/sizes.json', 'utf8');
-
-var sizes = JSON.parse(sizesFile);
-var DoubleClick = sizes.DoubleClick;
-var Dynamic = sizes.Dynamic;
-var Master = sizes.Master;
-var Static = sizes.Static;
-
 // Setup localhost server to view production files.
 gulp.task('connect', connect.server((0, _functions.connectOptions)('Google Chrome', 8000, 35729))); //default
 gulp.task('ff', ff.server((0, _functions.connectOptions)('firefox', 1337, 35727)));

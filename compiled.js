@@ -22,6 +22,6 @@ gulp.task('html', function () {
     }
   };
 
-  (0, _functions.checkSettingsAndRun)((0, _functions.Static), runHtml, 'static');
-  (0, _functions.checkSettingsAndRun)((0, _functions.DoubleClick), runHtml, 'doubleclick');
+  (0, _functions.checkSettingsAndRun)(Static, runHtml, 'static');
+  (0, _functions.checkSettingsAndRun)(DoubleClick, runHtml, 'doubleclick');
 });

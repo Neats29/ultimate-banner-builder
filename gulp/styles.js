@@ -10,6 +10,12 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     imagemin = require('gulp-imagemin');
 
+var Static = (0, _functions.Static);
+var Master = (0, _functions.Master);
+var DoubleClick = (0, _functions.DoubleClick);
+var Dynamic = (0, _functions.Dynamic);
+
+
 // Convert scss to css, minimise and copy into appropriate production folders
 gulp.task('sass', function () {
 

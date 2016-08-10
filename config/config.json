@@ -1,0 +1,9 @@
+{
+  "appRoot": "process.cwd()",
+  "sizesFile": "fs.readFileSync(appRoot + '/sizes.json', 'utf8')",
+  "sizes": "JSON.parse(sizesFile)",
+  "DoubleClick": "sizes.DoubleClick",
+  "Dynamic": "sizes.Dynamic",
+  "Master": "sizes.Master",
+  "Static": "sizes.Static"
+}

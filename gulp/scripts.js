@@ -9,6 +9,10 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename');
 
+var Static = (0, _functions.Static);
+var DoubleClick = (0, _functions.DoubleClick);
+var sizeFolder = (0, _functions.sizeFolder);
+
 // Combine various javascript files and minimise them before copying into relevant production folders.
 gulp.task('scripts', function () {
 

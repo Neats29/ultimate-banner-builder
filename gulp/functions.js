@@ -16,6 +16,15 @@ var gulp = require('gulp'),
     path = require('path'),
     folders = getFolders(src);
 
+var appRoot = exports.appRoot = process.cwd();
+var sizesFile = exports.sizesFile = fs.readFileSync(appRoot + '/sizes.json', 'utf8');
+var sizes = exports.sizes = JSON.parse(sizesFile);
+var DoubleClick = exports.DoubleClick = sizes.DoubleClick;
+var Dynamic = exports.Dynamic = sizes.Dynamic;
+var Master = exports.Master = sizes.Master;
+var Static = exports.Static = sizes.Static;
+var sizeFolder = exports.sizeFolder = sizes.sizeFolder;
+
 // Get folder names inside a given directory (dir)
 function getFolders(dir) {
   return fs.readdirSync(dir).filter(function (file) {
@@ -36,7 +45,7 @@ function isStatic(ad) {
 }
 
 // Loop through the folders to get to the right sub-directories and apply their custom copy tasks to them
-var sizeFolder;
+
 function getSubDirectories(fileType, copyFunc, Static) {
   return folders.map(function (sizeFolder) {
     var ad;
