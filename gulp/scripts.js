@@ -45,17 +45,12 @@ gulp.task('scripts', function () {
 });
 
 
-// Javascript Lint
+// Javascript Lint test comment
 gulp.task('js-lint', function () {
   return gulp.src(_config.paths.js.src)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
-    .on("error", function() {
-      process.exit(-1);
-    })
-    .on("end", function() {
-      process.exit();
-    });
+    .pipe(jshint.reporter('fail'));
 });
 
 
