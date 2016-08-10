@@ -95,6 +95,8 @@
                         "onVisible": true,
                         "initialize": true,
                         "getContent": true,
-                        "TweenLite": true
+                        "TweenLite": true,
+                        "removeCover": true,
+                        "animate": true
                       } // additional predefined global variables
 }

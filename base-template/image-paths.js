@@ -1,3 +1,5 @@
+'use strict';
+
 function getContent() {
   // Create your own version of the below object with local references.
 

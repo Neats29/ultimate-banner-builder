@@ -23,7 +23,6 @@ function getFolders(dir) {
 }
 
 
-
 class GenerateTemplates {
 	constructor() {
 		this.loadSizes();

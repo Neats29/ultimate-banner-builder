@@ -1,8 +1,8 @@
-@import './variables';
-@import './tools.functions';
-@import './generic.normalize';
-@import './objects.global';
-@import './trumps.helpers';
+@import './_scss/variables';
+@import './_scss/tools.functions';
+@import './_scss/generic.normalize';
+@import './_scss/objects.global';
+@import './_scss/trumps.helpers';
 
 .banner {
   background-size: 100% 100% !important;
@@ -26,8 +26,3 @@
   height: calculate-rem({{height}});
   width: calculate-rem({{width}});
 }
-
-
-/* ==========================================================================
-  ADD CODE BELOW THIS LINE
-========================================================================== */

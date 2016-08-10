@@ -1,6 +1,9 @@
 'use strict';
 
 const _functions  = require('./functions.js'),
+      Master      = (0, _functions.Master),
+      DoubleClick = (0, _functions.DoubleClick),
+      sizes       = (0, _functions.sizes),
       chalk       = require('chalk'),
       del         = require('del'),
       fs          = require('fs'),

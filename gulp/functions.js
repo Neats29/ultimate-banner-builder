@@ -48,8 +48,13 @@ function connectOptions(browser, port, live) {
 
 // Get folder names inside a given directory (dir).
 function getFolders(dir) {
+  var ignore = "_";
+
   return fs.readdirSync(dir).filter(function (file) {
-    return fs.statSync(path.join(dir, file)).isDirectory();
+    // Ignore the scss folder in src
+    if (file.substring(0, ignore.length) !== ignore) {
+      return fs.statSync(path.join(dir, file)).isDirectory();
+    }
   });
 }
 
