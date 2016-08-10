@@ -1,26 +1,29 @@
 'use strict';
 
-const gulp       = require('gulp'),
-      watch      = require('gulp-watch'),
-
+const _config    = require('./config/config.json'),
+      data       = require('./sizes.json'),
       requireDir = require('require-dir'),
       tasks      = requireDir('./gulp'),
-      data       = require('./sizes.json');
 
-// Setup watch tasks
+      gulp       = require('gulp'),
+      watch      = require('gulp-watch'),
+      guppy      = require('git-guppy')(gulp);
+
+// Watch tasks
 gulp.task('watch', () => {
-  gulp.watch('src/**/*.html', ['html']);
-  gulp.watch('src/**/*.scss', ['sass']);
-  gulp.watch('src/**/*.js', ['scripts']);
-  gulp.watch(['src/**/img', 'src/**/img/*'], ['img']);
+  gulp.watch(_config.paths.html.src, ['html']);
+  gulp.watch(_config.paths.scss.src, ['sass']);
+  gulp.watch(_config.paths.js.src,   ['scripts']);
+  gulp.watch(_config.paths.img.src,  ['img']);
 });
+
 
 gulp.task('default', ['connect', 'html', 'sass', 'img', 'scripts', 'watch']);
 gulp.task('dev', ['html', 'sass', 'img', 'scripts']);
 gulp.task('test', ['connect', 'ff', 'safari']);
 
-// Testing task
-// gulp.task('test', ['html-lint', 'js-lint', 'scss-lint']);
+// Linting task
+gulp.task('linting', ['html-lint', 'js-lint', 'scss-lint']);
 
 // Test code on commit
-// gulp.task('pre-commit', ['test']);
+gulp.task('pre-commit', ['linting']);

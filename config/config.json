@@ -8,13 +8,18 @@
 
     "js": {
       "src": "./src/**/*.js",
-      "all": "./**/*.js"
+      "all": "./**/*.js",
+      "config": "./config/.jshintrc"
     },
 
     "scss": {
       "src": "./src/**/*.scss",
       "all": "./**/*.scss",
       "config": "./config/sass-lint.yml"
+    }
+
+    "img": {
+      "src": ["src/**/img", "src/**/img/*"]
     }
   }
 }
