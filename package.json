@@ -50,6 +50,7 @@
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
     "merge2": "^1.0.2",
+    "require-dir": "^0.3.0",
     "run-sequence": "^1.2.1",
     "vinyl-paths": "^2.1.0",
     "walk": "^2.3.9"

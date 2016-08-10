@@ -1,6 +1,12 @@
-"use strict";
+'use strict';
+
 const gulp       = require('gulp'),
-    watch        = require('gulp-watch'),
+      watch      = require('gulp-watch'),
+
+      requireDir = require('require-dir'),
+      tasks      = requireDir('./gulp'),
+      data       = require('./sizes.json'),
+
     sass         = require('gulp-sass'),
     cleanCSS     = require('gulp-clean-css'),
     htmlmin      = require('gulp-htmlmin'),
@@ -11,29 +17,29 @@ const gulp       = require('gulp'),
     connect      = require('gulp-connect-multi')(),
     imagemin     = require('gulp-imagemin'),
     rename       = require('gulp-rename'),
+    removeCode   = require('gulp-remove-code'),
+    sourcemaps   = require('gulp-sourcemaps'),
+    jshint       = require('gulp-jshint'),
+    sassLint     = require('gulp-sass-lint'),
+    cache        = require('gulp-cache'),
+    zip          = require('gulp-zip'),
+    // shell     = require('gulp-shell'),
+    filter       = require('gulp-filter'),
+    // vinylPaths= require('vinyl-paths'),
+    autoprefixer = require('gulp-autoprefixer'),
+    //uncss      = require('gulp-uncss'),
+
     merge        = require('merge-stream'),
     fs           = require('fs'),
     path         = require('path'),
     del          = require('del'),
-    removeCode   = require('gulp-remove-code'),
-    sourcemaps   = require('gulp-sourcemaps'),
-    jshint       = require('gulp-jshint'),
-    //uncss      = require('gulp-uncss'),
-    sassLint     = require('gulp-sass-lint'),
-    cache        = require('gulp-cache'),
-    zip          = require('gulp-zip'),
     merge2       = require('merge2'),
     runSequence  = require('run-sequence'),
     chalk        = require('chalk'),
-    shell        = require('gulp-shell'),
-    filter       = require('gulp-filter'),
-    vinylPaths   = require('vinyl-paths'),
-    autoprefixer = require('gulp-autoprefixer'),
 
-
-    data = require('./sizes.json'),
-    src = 'src',
-    folders = getFolders(src);
+    data         = require('./sizes.json'),
+    src          = 'src',
+    folders      = getFolders(src);
 
 const appRoot = process.cwd();
 const sizesFile = fs.readFileSync(`${appRoot}/sizes.json`, `utf8`);
