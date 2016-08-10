@@ -4,7 +4,7 @@
   "description": "A banner build template that also works to generate static versions",
   "main": "index.js",
   "scripts": {
-    "generate": "babel-node build/generate-templates.js"
+    "build": "babel .js -o compiled.js"
   },
   "repository": {
     "type": "git",

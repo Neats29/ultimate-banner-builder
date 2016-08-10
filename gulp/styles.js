@@ -1,53 +1,45 @@
-import { getFolders, checkSettingsAndRun, isStatic, getSubDirectories, connectOptions } from 'functions';
+'use strict';
 
-const gulp         = require('gulp'),
-      autoprefixer = require('gulp-autoprefixer'),
-      cleanCSS     = require('gulp-clean-css'),
-      sass         = require('gulp-sass'),
-      sassLint     = require('gulp-sass-lint'),
-      sourcemaps   = require('gulp-sourcemaps');
-      imagemin     = require('gulp-imagemin'),
+var _functions = require('./functions.js');
+
+var gulp = require('gulp'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cleanCSS = require('gulp-clean-css'),
+    sass = require('gulp-sass'),
+    sassLint = require('gulp-sass-lint'),
+    sourcemaps = require('gulp-sourcemaps'),
+    imagemin = require('gulp-imagemin');
 
 // Convert scss to css, minimise and copy into appropriate production folders
-gulp.task('sass', () => {
+gulp.task('sass', function () {
 
-  var copyAndPipe = (gulpSrc, gulpDest) => {
-    return gulp.src(gulpSrc)
-      .pipe(autoprefixer({
-        browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
-      }))
-      .pipe(sassLint({
-        configFile: './sass-lint.yml'
-      }))
-      .pipe(sassLint.format())
-      .pipe(sassLint.failOnError())
-      //.pipe(uncss({ html: 'index.html' })) //to be uncommented in production
-      .pipe(sourcemaps.init())
-      .pipe(sass({includePaths: ['src']}).on('error', sass.logError))
-      .pipe(cleanCSS())
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest(gulpDest));
+  var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
+    return gulp.src(gulpSrc).pipe(autoprefixer({
+      browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
+    })).pipe(sassLint({
+      configFile: './sass-lint.yml'
+    })).pipe(sassLint.format()).pipe(sassLint.failOnError())
+    //.pipe(uncss({ html: 'index.html' })) //to be uncommented in production
+    .pipe(sourcemaps.init()).pipe(sass({ includePaths: ['src'] }).on('error', sass.logError)).pipe(cleanCSS()).pipe(sourcemaps.write()).pipe(gulp.dest(gulpDest));
   };
 
-  var runSass = (ad_type) => {
-    if (isStatic(ad_type)) {
-      return getSubDirectories('scss', copyAndPipe, true);
+  var runSass = function runSass(ad_type) {
+    if ((0, _functions.isStatic)(ad_type)) {
+      return (0, _functions.getSubDirectories)('scss', copyAndPipe, true);
     } else if (ad_type === "doubleclick") {
-      return getSubDirectories('scss', copyAndPipe, false);
+      return (0, _functions.getSubDirectories)('scss', copyAndPipe, false);
     }
   };
 
-  checkSettingsAndRun (Static, runSass, 'static');
-  checkSettingsAndRun (DoubleClick, runSass, 'doubleclick');
+  (0, _functions.checkSettingsAndRun)(Static, runSass, 'static');
+  (0, _functions.checkSettingsAndRun)(DoubleClick, runSass, 'doubleclick');
 });
 
-
 // Optimise and copy images across into production static folders
-gulp.task('img', () => {
+gulp.task('img', function () {
 
-  var copyAndPipe = (gulpSrc, gulpDest) => {
-    return gulp.src(gulpSrc)
-    .pipe(imagemin({
+  var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
+    return gulp.src(gulpSrc).pipe(imagemin({
       // jpg
       progressive: true,
 
@@ -59,15 +51,14 @@ gulp.task('img', () => {
 
       // svg
       multipass: true
-    }))
-    .pipe(gulp.dest(gulpDest));
+    })).pipe(gulp.dest(gulpDest));
   };
 
   if (Master && Static && !DoubleClick || !Master && Static) {
-    getSubDirectories('img', copyAndPipe, true);
+    (0, _functions.getSubDirectories)('img', copyAndPipe, true);
   }
 
   if (DoubleClick === true && Dynamic === false) {
-    getSubDirectories('img', copyAndPipe, false);
+    (0, _functions.getSubDirectories)('img', copyAndPipe, false);
   }
 });
