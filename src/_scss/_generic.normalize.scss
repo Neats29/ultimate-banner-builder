@@ -11,8 +11,8 @@
 // 2. Prevent iOS text size adjust after orientation change, without disabling user zoom.
 html {
   // font-family: $font-family; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
   -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
   font-weight: 100;
 }
 
@@ -38,16 +38,15 @@ table {
 
 a {
   text-decoration: none;
-}
 
-// Address `outline` inconsistency between Chrome and other browsers.
-a:focus {
-  outline: thin dotted;
-}
+  // Address `outline` inconsistency between Chrome and other browsers.
+  &:focus {
+    outline: thin dotted;
+  }
 
-// Improve readability when focused and also mouse hovered in all browsers.
-a:active,
-a:hover {
-  outline: 0;
+  // Improve readability when focused and also mouse hovered in all browsers.
+  &:active,
+  &:hover {
+    outline: 0;
+  }
 }
-

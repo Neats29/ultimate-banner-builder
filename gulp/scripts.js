@@ -1,6 +1,7 @@
 'use strict';
 
 const _functions  = require('./functions.js'),
+      _config     = require('../config/config.json'),
       Static      = (0, _functions.Static),
       DoubleClick = (0, _functions.DoubleClick),
       sizeFolder  = (0, _functions.sizeFolder),
@@ -18,8 +19,6 @@ gulp.task('scripts', function () {
 
   var copyAndPipe = function copyAndPipe(gulpSrc, gulpDest) {
     return gulp.src(gulpSrc)
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
     .pipe(sourcemaps.init()).pipe(concat(sizeFolder + '.js'))
     .pipe(uglify())
     .pipe(rename('ad.js'))
@@ -37,3 +36,11 @@ gulp.task('scripts', function () {
   (0, _functions.checkSettingsAndRun)(Static, runJS, 'static');
   (0, _functions.checkSettingsAndRun)(DoubleClick, runJS, 'doubleclick');
 });
+
+
+gulp.task('js-lint', function () {
+  return gulp.src(_config.paths.js.src)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+});
+

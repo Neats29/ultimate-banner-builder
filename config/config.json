@@ -2,16 +2,19 @@
   "paths": {
     "html": {
       "src": "./src/**/*.html",
-      "all": "./**/*.html"
+      "all": "./**/*.html",
+      "config": "./config/.htmllintrc"
     },
+
     "js": {
       "src": "./src/**/*.js",
       "all": "./**/*.js"
     },
+
     "scss": {
       "src": "./src/**/*.scss",
       "all": "./**/*.scss",
-      "config": "./sass-lint.yml"
+      "config": "./config/sass-lint.yml"
     }
   }
 }

@@ -15,9 +15,14 @@
   top: 0;
 }
 
+.dummy-text {
+  color: $white;
+  text-align: center;
+}
+
 // Required by DoubleClick
 #bg-exit {
-  background-color: rgba($white,0);
+  background-color: $white-transparent;
   cursor: pointer;
   height: 100%;
   left: 0;

@@ -51,11 +51,6 @@ gulp.task('sass', function () {
       .pipe(autoprefixer({
         browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
       }))
-      .pipe(sassLint({
-        configFile: './sass-lint.yml'
-      }))
-      .pipe(sassLint.format())
-      .pipe(sassLint.failOnError())
       //.pipe(uncss({ html: 'index.html' }))
       .pipe(sourcemaps.init())
       .pipe(sass({ includePaths: ['src'] }).on('error', sass.logError))
