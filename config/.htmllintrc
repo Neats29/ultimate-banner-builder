@@ -1,8 +1,9 @@
 {
-  "attr"
   "indent-style": "spaces",
   "attr-quote-style": "double",
   "doctype-html5": true,
   "indent-width": 2,
-  "title-no-dup": true
+  "title-no-dup": true,
+  "head-req-title": false,
+  "id-class-style": false
 }
