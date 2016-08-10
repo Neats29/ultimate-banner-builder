@@ -19,7 +19,7 @@
 
 .full-dimension {
   height: calculate-rem({{height}});
-  width: calculate-rem({{width}});
+  width: calculate-rem({{width}}) !important;
 }
 
 .slide-container {
