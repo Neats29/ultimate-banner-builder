@@ -13,7 +13,10 @@ const _functions  = require('./functions.js'),
       sourcemaps  = require('gulp-sourcemaps'),
       uglify      = require('gulp-uglify'),
       plumber     = require('gulp-plumber'),
-      newer       = require('gulp-newer');
+      newer       = require('gulp-newer'),
+      ff          = require('gulp-connect-multi')(),
+      safari      = require('gulp-connect-multi')(),
+      connect     = require('gulp-connect-multi')();
 
 
 // Combine various javascript files and minimise them before copying into relevant production folders.
@@ -41,10 +44,23 @@ gulp.task('scripts', function () {
   (0, _functions.checkSettingsAndRun)(DoubleClick, runJS, 'doubleclick');
 });
 
+
 // Javascript Lint
 gulp.task('js-lint', function () {
   return gulp.src(_config.paths.js.src)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
+    .on("error", function() {
+      process.exit(-1);
+    })
+    .on("end", function() {
+      process.exit();
+    });
 });
+
+
+// Setup localhost server to view production files.
+gulp.task('connect', connect.server((0, _functions.connectOptions)('Google Chrome', 8000, 35729))); //default
+gulp.task('ff', ff.server((0, _functions.connectOptions)('firefox', 1337, 35727)));
+gulp.task('safari', safari.server((0, _functions.connectOptions)('safari', 8080, 35722)));
 

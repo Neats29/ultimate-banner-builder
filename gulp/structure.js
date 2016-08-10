@@ -13,9 +13,6 @@ const _functions  = require('./functions.js'),
       runSequence = require('run-sequence'),
 
       gulp        = require('gulp'),
-      ff          = require('gulp-connect-multi')(),
-      safari      = require('gulp-connect-multi')(),
-      connect     = require('gulp-connect-multi')(),
       zip         = require('gulp-zip'),
       rename      = require('gulp-rename'),
       cache       = require('gulp-cache');
@@ -24,12 +21,6 @@ const _functions  = require('./functions.js'),
 gulp.task('clear', function () {
   cache.clearAll();
 });
-
-
-// Setup localhost server to view production files.
-gulp.task('connect', connect.server((0, _functions.connectOptions)('Google Chrome', 8000, 35729))); //default
-gulp.task('ff', ff.server((0, _functions.connectOptions)('firefox', 1337, 35727)));
-gulp.task('safari', safari.server((0, _functions.connectOptions)('safari', 8080, 35722)));
 
 
 gulp.task('del', function () {
