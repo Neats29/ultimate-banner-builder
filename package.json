@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A banner build template that also works to generate static versions",
   "main": "index.js",
+  "babel": {
+    "presets": ["es2015"]
+  },
   "scripts": {
     "build": "babel gulp/html.js -o compiled.js",
     "generate": "babel-node build/generate-templates.js"
