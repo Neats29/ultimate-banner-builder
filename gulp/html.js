@@ -69,10 +69,5 @@ function htmllintReporter(filepath, issues) {
       });
 
       process.exitCode = 1;
-
-  } else {
-
-    gutil.log(gutil.colors.cyan(fileName) + gutil.colors.yellow(" has passed linting!"));
-
   }
 }
