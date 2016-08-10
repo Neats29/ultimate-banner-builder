@@ -79,7 +79,8 @@ class GenerateTemplates {
 				console.error(chalk.red(`src could not be created`));
 			} else {
 				console.info(chalk.blue(`src has been created`));
-				that.populateSrc();
+			  fs.mkdirSync(sourceDirectory + '/_scss');
+        that.populateSrc();
 			}
 		});
 	}
@@ -91,11 +92,11 @@ class GenerateTemplates {
     let variableSass = `${appRoot}/base-template/scss/_variables.scss`;
     let functionSass = `${appRoot}/base-template/scss/_tools.functions.scss`;
     let helperSass = `${appRoot}/base-template/scss/_trumps.helpers.scss`;
-		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}_objects.global.scss`));
-		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}_generic.normalize.scss`));
-    fs.createReadStream(variableSass).pipe(fs.createWriteStream(`${sourceDirectory}_variables.scss`));
-    fs.createReadStream(functionSass).pipe(fs.createWriteStream(`${sourceDirectory}_tools.functions.scss`));
-    fs.createReadStream(helperSass).pipe(fs.createWriteStream(`${sourceDirectory}_trumps.helpers.scss`));
+		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_objects.global.scss`));
+		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_generic.normalize.scss`));
+    fs.createReadStream(variableSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_variables.scss`));
+    fs.createReadStream(functionSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_tools.functions.scss`));
+    fs.createReadStream(helperSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_trumps.helpers.scss`));
 		this.processSizes();
 	}
 

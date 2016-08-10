@@ -22,7 +22,7 @@ function checkPageLoaded() {
 }
 
 
-// Attach exit url to bg-exit element
+// Attach exit url to bg-exit element.
 function exitHandler() {
   var dynamicContent = getContent();
   document.getElementById('bg-exit').addEventListener('click', function() {
