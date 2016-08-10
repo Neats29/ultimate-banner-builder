@@ -29,6 +29,12 @@
 - `"Master"` (boolean): set to true when building the initial Master banner size
 - Once complete, save the *sizes.json* file.
 
+### Configure the browser matrix auto-prefixer  
+- In Gulpfile.js, amend the `browser` attribute in accordance with the client's broswer matrix, e.g:
+  `.pipe(autoprefixer({
+    browsers: ['IE >= 10', 'last 2 Firefox versions', 'Safari >= 6', 'last 2 Chrome versions']
+  }))`
+
 ### Build the Master template
 - Run `npm run generate` (This creates the *src* folder structure where you will build the Master version)
 - Run `gulp` (This creates the *prod* output folder structure where the final ad files will be automatically served)
@@ -72,6 +78,7 @@
   - *normalise.scss*
   - *doubleclick.js* (if DoubleClick is true)
   - *image-paths.js* (if Static is true)
+
 
 ### General error handling
 
