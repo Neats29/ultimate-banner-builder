@@ -60,8 +60,6 @@ function htmllintReporter(filepath, issues) {
   var filepathSplit = filepath.split('/');
   var fileName = filepathSplit[filepathSplit.length - 1];
 
-  gutil.log(gutil.colors.yellow("Linting '") + gutil.colors.cyan(fileName) + gutil.colors.yellow("'"));
-
   if (issues.length > 0) {
 
       issues.forEach(function (issue) {
