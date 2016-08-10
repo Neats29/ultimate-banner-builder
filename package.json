@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "description": "A banner build template that also works to generate static versions",
   "main": "index.js",
+  "babel": {
+    "presets": ["es2015"]
+  },
   "scripts": {
+    "build": "babel gulp/html.js -o compiled.js",
     "generate": "babel-node build/generate-templates.js"
   },
   "repository": {
@@ -25,6 +29,7 @@
     "del": "^2.2.1",
     "event-stream": "^3.3.3",
     "fs-extra": "^0.30.0",
+    "git-guppy": "^1.2.1",
     "glob": "^7.0.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
@@ -34,9 +39,12 @@
     "gulp-connect-multi": "^1.0.8",
     "gulp-debounced-watch": "^1.0.4",
     "gulp-filter": "^4.0.0",
+    "gulp-htmllint": "0.0.9",
     "gulp-htmlmin": "^2.0.0",
     "gulp-imagemin": "^3.0.1",
     "gulp-jshint": "^2.0.1",
+    "gulp-newer": "^1.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-remove-code": "^1.0.2",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
@@ -45,11 +53,14 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-uncss": "^1.0.5",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.8",
     "gulp-zip": "^3.2.0",
+    "guppy-pre-commit": "^0.3.0",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
     "merge2": "^1.0.2",
+    "require-dir": "^0.3.0",
     "run-sequence": "^1.2.1",
     "vinyl-paths": "^2.1.0",
     "walk": "^2.3.9"

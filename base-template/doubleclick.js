@@ -1,7 +1,8 @@
-"use strict";
+'use strict';
+
 var Enabler;
 
-// Check DoubleClick initializer
+// Check DoubleClick initializer.
 function initialize() {
   if (Enabler.isInitialized()) {
     enablerInitHandler();
@@ -10,16 +11,18 @@ function initialize() {
   }
 }
 
-// When Enabler is initialized, check that the page has loaded
+
+// When Enabler is initialized, check that the page has loaded.
 function checkPageLoaded() {
-  Enabler.isPageLoaded() ? politeInit() :
-    Enabler.addEventListener(
-      studio.events.StudioEvent.PAGE_LOADED,
-      politeInit
-    );
+  if (Enabler.isPageLoaded()) {
+    politeInit();
+  } else {
+    Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, politeInit);
+  }
 }
 
-// Attach exit url to bg-exit element
+
+// Attach exit url to bg-exit element.
 function exitHandler() {
   var dynamicContent = getContent();
   document.getElementById('bg-exit').addEventListener('click', function() {
@@ -27,13 +30,14 @@ function exitHandler() {
   });
 }
 
+
 // politeInit will run after the page has loaded. Start animations inside this function.
 function politeInit() {
   isVisible = false;
   setImages();
   exitHandler();
 
-  if(Enabler.isVisible()){
+  if(Enabler.isVisible()) {
     onVisible();
   } else {
     Enabler.addEventListener(studio.events.StudioEvent.VISIBLE, onVisible);
@@ -41,14 +45,13 @@ function politeInit() {
 }
 
 
-///
-/*  Only edit code below this line */
-///
+/* ==========================================================================
+  ONLY EDIT CODE BELOW THIS LINE
+========================================================================== */
 
 function getContent() {
-
-  /* If using Dynamic Content from DoubleClick Studio, replace this code with Generated Dynamic Code.
-     Otherwise, edit the devDynamicContent object's properties with the relative paths to images. */
+  // If using Dynamic Content from DoubleClick Studio, replace this code with Generated Dynamic Code.
+  // Otherwise, edit the devDynamicContent object's properties with the relative paths to images.
 
   var devDynamicContent = {};
   devDynamicContent.DoubleClick= [{}];
@@ -69,8 +72,8 @@ function getContent() {
   devDynamicContent.DoubleClick[0].exit.Url = "http://www.google.com/";
   Enabler.setDevDynamicContent(devDynamicContent);
 
-  /* End of code to be replaced */
+  // End of code to be replaced
 
-  // If using Dynamic Content from DoubleClick Studio, ensure that the below  variable matches the one in the code directly above.
+  // If using Dynamic Content from DoubleClick Studio, ensure that the below variable matches the one in the code directly above.
   return devDynamicContent.DoubleClick[0];
 }

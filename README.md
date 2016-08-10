@@ -67,6 +67,7 @@
 - When the banners are finished, run `gulp zip` to compress each static production banner size and version into a zip file and create a global zip file containing all versions.
 
 ### General Notes & Tips
+- The pre-commit hook will run every time you try to commit your code. The commit will abort if your html, scss, or js fails the lint. You can run the linter at any time with the linting task: ` $ gulp linting`.
 - The *global-images* folder inside *base-template* contains example images to show working versions of static banners which use local images. Remove these images when ready to build to prevent them from being copied into the *src* and *prod* folders.
 - If all ad sizes make use of a particular image, place the image inside *global-images* to serve it to all sizes.
 - If new ad sizes are added to the specifications after you have completed the Master banner and have started building all size variations, add these additional banner sizes to the `"dimensions"` array in the *sizes.json* file and run `npm run generate` again to add them to the *src* folder.
@@ -84,6 +85,7 @@
 
 - If you get the following error: `no such file or directory, scandir 'src'` it means that you are missing the src directory, run `npm run generate` to create the src folder.
 - If you generate the zip files and clicking on the zip file, generates a file with the `.cpgz` extension, then download this app [Unarchiver](https://itunes.apple.com/us/app/the-unarchiver/id425424353?mt=12) and it should fix it. This seems to be a mac bug.
+- If your commit fails, it is likely due to one of the pre-commit lint tasks failing. Check your terminal output to ensure all errors are rectified (warnings will pass the lint). 
 
 ### Testing in the browser
 

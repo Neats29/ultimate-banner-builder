@@ -1,0 +1,27 @@
+{
+  "paths": {
+    "html": {
+      "src": "./src/**/*.html",
+      "all": "./**/*.html",
+      "config": "./config/.htmllintrc"
+    },
+
+    "js": {
+      "src": "./src/**/*.js",
+      "all": "./**/*.js",
+      "lint": ["./**/*.js", "!./prod/**/*.js", "!./node_modules/**/*.js"],
+      "config": "./.jshintrc"
+    },
+
+    "scss": {
+      "src": "./src/**/*.scss",
+      "all": "./**/*.scss",
+      "ignore": "!./src/_scss/_trumps.helpers.scss",
+      "config": "./config/sass-lint.yml"
+    },
+
+    "img": {
+      "src": ["src/**/img", "src/**/img/*"]
+    }
+  }
+}
