@@ -17,7 +17,6 @@ gulp.task('watch', () => {
   gulp.watch(_config.paths.img.src,  ['img']);
 });
 
-
 gulp.task('default', ['connect', 'html', 'sass', 'img', 'scripts', 'watch']);
 gulp.task('dev', ['html', 'sass', 'img', 'scripts']);
 gulp.task('test', ['connect', 'ff', 'safari']);
