@@ -23,7 +23,7 @@ gulp.task('dev', ['html', 'sass', 'img', 'scripts']);
 gulp.task('test', ['connect', 'ff', 'safari']);
 
 // Linting task
-gulp.task('linting', ['html-lint', 'js-lint', 'scss-lint']);
+gulp.task('linting', ['html-lint', 'js-lint', 'sass-lint']);
 
 // Test code on commit
 gulp.task('pre-commit', ['linting']);
