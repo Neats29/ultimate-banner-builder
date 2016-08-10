@@ -1,0 +1,17 @@
+{
+  "paths": {
+    "html": {
+      "src": "./src/**/*.html",
+      "all": "./**/*.html"
+    },
+    "js": {
+      "src": "./src/**/*.js",
+      "all": "./**/*.js"
+    },
+    "scss": {
+      "src": "./src/**/*.scss",
+      "all": "./**/*.scss",
+      "config": "./sass-lint.yml"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 'use strict';
 
 const _functions    = require('./functions.js'),
+      _config       = require('../config/config.json'),
       DoubleClick   = (0, _functions.DoubleClick),
       Dynamic       = (0, _functions.Dynamic),
       Master        = (0, _functions.Master),
@@ -53,7 +54,8 @@ gulp.task('sass', function () {
       .pipe(sassLint({
         configFile: './sass-lint.yml'
       }))
-      .pipe(sassLint.format()).pipe(sassLint.failOnError())
+      .pipe(sassLint.format())
+      .pipe(sassLint.failOnError())
       //.pipe(uncss({ html: 'index.html' }))
       .pipe(sourcemaps.init())
       .pipe(sass({ includePaths: ['src'] }).on('error', sass.logError))
@@ -73,3 +75,15 @@ gulp.task('sass', function () {
   (0, _functions.checkSettingsAndRun)(Static, runSass, 'static');
   (0, _functions.checkSettingsAndRun)(DoubleClick, runSass, 'doubleclick');
 });
+
+
+// Scss Linting
+gulp.task('sass-lint', function () {
+  return gulp.src(_config.paths.scss.src)
+    .pipe(sassLint({
+      configFile: _config.paths.scss.config
+    }))
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError());
+});
+
