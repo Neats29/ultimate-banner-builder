@@ -1,23 +1,29 @@
-'use strict';
-
 // Initialise variables
 var clickTag = "";
 
-// Begin animation after a time delay to allow for loading.
+// Main function. This initiates everything for Static Builds
+// Wait for the DOM to load before initialising banner load
+function initialize() {
+  if (document.addEventListener) {// For all major browsers, except IE 8 and earlier
+    document.addEventListener("DOMContentLoaded", politeInit);
+  } else {
+    politeInit();
+  }
+}
+
+// Begin animation after a time delay to allow for loading
 function politeInit() {
-  setTimeout(function() {
+  setTimeout(function() { 
     exitHandler();
     setImages();
   }, 500);
-
-  setTimeout(function() {
+  setTimeout(function() { 
     removeCover();
     animate();
   }, 1000);
 }
 
-
-// Attach exit url to bg-exit element.
+// Attach exit url to bg-exit element
 function exitHandler() {
   var dynamicContent = getContent();
   var bgExit = document.getElementById('bg-exit');
@@ -33,15 +39,4 @@ function exitHandler() {
     anchor.setAttribute('target', '_blank');
     anchor.setAttribute('href', clickTag);
   });
-}
-
-
-// Wait for the DOM to load before initialising banner load.
-function initialize() {
-  if (document.addEventListener) {
-    // For all major browsers, except IE 8 and earlier
-    document.addEventListener("DOMContentLoaded", politeInit);
-  } else {
-    politeInit();
-  }
 }
