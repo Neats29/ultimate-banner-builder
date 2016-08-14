@@ -149,13 +149,13 @@ function removeCover() {
 *
 *  EXAMPLE USE:
 *  In the HTML HEAD section:      <link id="cssSheet" rel="stylesheet" href="overwrite.css"> - placed above current JS file, use unique IDs per sheet declaration.
-*  In onPageLoaded() function:    setCSS(adContent); - only needs to be declared once, add items to setCSS(adContent) itself.
-*  In setCSS(adContent) function: document.getElementById(adContent.cssFileID).setAttribute('href', adContent.cssFile.Url); - cssFileID and cssFile.Url are both from the dynamic content so need entries in the spreadsheet/dev object.
+*  In onPageLoaded() function:    setStyleSheet(adContent); - only needs to be declared once, add items to setStyleSheet(adContent) itself.
+*  In setStyleSheet(adContent) function: document.getElementById(adContent.cssFileID).setAttribute('href', adContent.cssFile.Url); - cssFileID and cssFile.Url are both from the dynamic content so need entries in the spreadsheet/dev object.
 *
 */
-function setCSS(adContent){
+function setStyleSheet(adContent){
   //document.getElementById(adContent.cssFileID).setAttribute('href', adContent.cssFile.Url);
-}//end setCSS(adContent)
+}//end setStyleSheet(adContent)
 
 
 /*
