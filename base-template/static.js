@@ -35,7 +35,7 @@ function politeInit() {
 
 
 // Attach exit url to bg-exit element
-function exitHandler() {
+function exitHandler(adContent) {
   /*
   var dynamicContent = getContent();
   var bgExit = document.getElementById('bg-exit');
