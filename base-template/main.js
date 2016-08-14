@@ -20,13 +20,13 @@ else{
 
 
 /*
-*  Starts the advertisement when it is loaded and no aminations have been run yet.
+*  Starts the advertisement when images are loaded and no aminations have been run yet.
+*  Called when the ad is visibile in the browser.
 *  
 *  @param:  This function does not take any arguments.
 *  @return: This function does not return anything.
 *
 */
-// Called when the ad is visibile in the browser
 function onVisible() {
   isVisible = true;
   if (isImagesLoaded && !isAnimated) {
@@ -38,12 +38,13 @@ function onVisible() {
 
 /*
 *  Starts the advertisement when it is visible and no aminations have been run yet.
+*  Called when all images are loaded.
 *  
 *  @param:  This function does not take any arguments.
 *  @return: This function does not return anything.
 *
 */
-function onImagesLoaded() {//not needed? Called after setImages have assigned images and is callback of imgpreload check
+function onImagesLoaded() {
   isImagesLoaded = true;
   if (isVisible && !isAnimated) {
     removeCover();
@@ -53,7 +54,7 @@ function onImagesLoaded() {//not needed? Called after setImages have assigned im
 
 
 /*
-*  Sets background images in the DOM. Iterates over retrun from imageMap(adContent).
+*  Sets background images in the DOM. Iterates over Object returned from imageMap(adContent).
 *  
 *  @param imageAssignments: imageMap object with key:value pairs from imageMap(adContent) function.
 *  @return:                 This function does not return anything.
@@ -84,30 +85,30 @@ function imgpreload(imgs, callback) {
   var images = [];
   imgs = Object.prototype.toString.apply( imgs ) === '[object Array]' ? imgs : [imgs];
   var inc = function() {
-    loaded += 1;//adds 1 to the count each time inc function is run
-    if ( loaded === imgs.length && callback ) {//checks if number of total images === those that are loaded.
+    loaded += 1;
+    if ( loaded === imgs.length && callback ) {
       callback( images );
     }
   };
-  for ( var i = 0; i < imgs.length; i++ ) {//runs 'inc' function according to state of images[i]
+  for ( var i = 0; i < imgs.length; i++ ) {
     images[i] = new Image();
-    images[i].onabort = inc;//if this happens still run 'inc'
-    images[i].onerror = inc;//if this happens still run 'inc'
-    images[i].onload = inc;//when it loads run 'inc'
-    images[i].src = imgs[i];//set source of 
+    images[i].onabort = inc;
+    images[i].onerror = inc;
+    images[i].onload = inc;
+    images[i].src = imgs[i];
   }
 }
 
 
 /*
-*  Controller function for the additions of HTML/Text into the DOM.
+*  Controller Function for the addition of HTML/Text into the DOM.
 *  
 *  @param adContent: The Enabler object with dynamic content that is passed in.
 *  @return:          This function does not return anything.
 *
 *  EXAMPLE USE:
 *  In setText(adContent) function: addText(adContent.price2Text, adContent.price2Element); - add as many of these lines as required.
-*  In onPageLoaded() function:     setText(adContent); - only needs to be called once, calls to 'addText' function in setText(adContent) will then be run.
+*  In politeInit() function:     setText(adContent); - only needs to be called once, setText(adContent) needs to be populated.
 *
 */
 function setText(adContent){
@@ -116,11 +117,11 @@ function setText(adContent){
 
 
 /*
-*  Allows plain text or HTML to be placed inside of a Tag in the DOM.
+*  Injects plain text or HTML to be placed inside an HTML Element in the DOM.
 *  
 *  @param text:    The text/HTML (string) to be added.
 *  @param element: The ID (string) of the element to be modified.
-*  @return:        This action of setting DOM element content.
+*  @return:        The action of setting DOM element content.
 *
 */
 function addText(text, element) {//move out of this function
@@ -148,8 +149,8 @@ function removeCover() {
 *  @return:          This function does not return anything.
 *
 *  EXAMPLE USE:
-*  In the HTML HEAD section:      <link id="cssSheet" rel="stylesheet" href="overwrite.css"> - placed above current JS file, use unique IDs per sheet declaration.
-*  In onPageLoaded() function:    setStyleSheet(adContent); - only needs to be declared once, add items to setStyleSheet(adContent) itself.
+*  In the HTML HEAD section:             <link id="cssSheet" rel="stylesheet" href="overwrite.css"> - placed above current JS file, use unique IDs per sheet declaration.
+*  In politeInit() function:             setStyleSheet(adContent); - only needs to be declared once, add items to setStyleSheet(adContent) itself.
 *  In setStyleSheet(adContent) function: document.getElementById(adContent.cssFileID).setAttribute('href', adContent.cssFile.Url); - cssFileID and cssFile.Url are both from the dynamic content so need entries in the spreadsheet/dev object.
 *
 */

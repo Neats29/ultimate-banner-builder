@@ -1,5 +1,5 @@
 /*
-*  Initializer - wait for Enabler Object to be ready.
+*  Initializer - action when Enabler Object is ready.
 *  
 *  @param:  This function does not take any arguments.
 *  @return: This function does not return anything.
@@ -25,10 +25,10 @@ function initialize() {
 function onInitialized() {
 
   if (Enabler.isPageLoaded()) {
-    onPageLoaded();
+    politeInit();
   }//end if
   else {
-    Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, onPageLoaded);
+    Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, politeInit);
   }//end else
   
   if(Enabler.isVisible()){
@@ -48,7 +48,7 @@ function onInitialized() {
 *  @return: This function does not return anything.
 *
 */
-function onPageLoaded() {
+function politeInit() {
   
   //////  Get Dynamic Content  //////
   var adContent = getContent();
@@ -57,9 +57,9 @@ function onPageLoaded() {
   //////  Set Content  //////
   exitHandler( adContent );
   setText( adContent );
-  setImages( imgMap );//last function in list, sets isAdLoaded to true
+  setImages( imgMap );
   
-}//end onPageLoaded()
+}//end politeInit()
 
 
 /*
@@ -69,7 +69,6 @@ function onPageLoaded() {
 *  @return:          This function does not return anything.
 *
 */
-// Attach exit url to bg-exit element
 function exitHandler(adContent) {
   document.getElementById('bg-exit').addEventListener('click', function() {Enabler.exit('clickTag', adContent.exit.Url);});
 }//end exitHandler(adContent)
