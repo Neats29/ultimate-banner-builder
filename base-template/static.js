@@ -36,25 +36,7 @@ function politeInit() {
 
 // Attach exit url to bg-exit element
 function exitHandler(adContent) {
-  /*
-  var dynamicContent = getContent();
-  var bgExit = document.getElementById('bg-exit');
-  var parent = bgExit.parentNode;
-  var anchor = document.createElement('a');
-  parent.replaceChild(anchor, bgExit);
-  anchor.appendChild(bgExit);
-
-  bgExit.addEventListener('click', function() {
-    if (clickTag === "") {
-      clickTag = dynamicContent.exit.Url;
-    }
-    anchor.setAttribute('target', '_blank');
-    anchor.setAttribute('href', clickTag);
-  });
-*/
-  //currently testing:
   document.getElementById('bg-exit').addEventListener('click', function() {
     window.open(adContent.exit.Url, '_blank');
   });
-
 }//end exitHandler()
