@@ -30,13 +30,15 @@ function onInitialized() {
   else {
     Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, politeInit);
   }//end else
-  
+
+  /*
   if(Enabler.isVisible()){
     onVisible();
   }//end if
   else {
     Enabler.addEventListener(studio.events.StudioEvent.VISIBLE, onVisible);
   }//end else
+*/
 
 }//end onInitialized()
 
@@ -48,6 +50,7 @@ function onInitialized() {
 *  @return: This function does not return anything.
 *
 */
+/*
 function politeInit() {
   
   //////  Get Dynamic Content  //////
@@ -60,6 +63,7 @@ function politeInit() {
   setImages( imgMap );
   
 }//end politeInit()
+*/
 
 
 /*
@@ -70,5 +74,14 @@ function politeInit() {
 *
 */
 function exitHandler(adContent) {
-  document.getElementById('bg-exit').addEventListener('click', function() {Enabler.exit('clickTag', adContent.exit.Url);});
+
+  var element = document.getElementById('bg-exit');
+
+  if (element.addEventListener) {//For all major browsers, except IE 8 and earlier
+      element.addEventListener("click", function() { window.open(adContent.exit.Url, '_blank'); });
+  }//end if
+  else if (element.attachEvent) {//For IE 8 and earlier versions
+      element.attachEvent("onclick", function() { window.open(adContent.exit.Url, '_blank'); });
+  }//end else
+
 }//end exitHandler(adContent)

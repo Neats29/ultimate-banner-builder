@@ -2,9 +2,9 @@
 
 //////  GLOBAL VARS  //////
 //var isAdLoaded = false;//not found in current main
-var isAnimated = false;
-var isVisible = false;
-var isImagesLoaded = false;
+//var isAnimated = false;
+//var isVisible = false;
+//var isImagesLoaded = false;
 
 //Sets initialize() to run so Script can start.
 //initialize() is found in both doubleClick.js and static.js
@@ -27,6 +27,7 @@ else{
 *  @return: This function does not return anything.
 *
 */
+/*
 function onVisible() {
   isVisible = true;
   if (isImagesLoaded && !isAnimated) {
@@ -34,6 +35,37 @@ function onVisible() {
     animate();
   }
 }
+*/
+
+
+/*
+*  Sets the content of the advertisement - only run when DOM is ready.
+*  
+*  @param:  This function does not take any arguments.
+*  @return: This function does not return anything.
+*
+*/
+function politeInit() {
+
+  //////  Get Content  //////
+  var adContent = getContent();
+  var imgMap = imageMap(adContent);
+
+  //////  Set Content  //////
+  setStyleSheet(adContent);
+  exitHandler(adContent);
+  setText(adContent);
+  setImages(imgMap);//required last function to be called.
+
+  //////  Start Animations  //////
+  /*
+  *  setImages has a call back when ready to "onImagesLoaded" in "imgpreload(images, onImagesLoaded)" - found in main.js
+  *  onImagesLoaded will run the last two functions required:
+  *    - removeCover();
+  *    - animate();
+  */
+
+}//end politeInit()
 
 
 /*
@@ -45,11 +77,12 @@ function onVisible() {
 *
 */
 function onImagesLoaded() {
-  isImagesLoaded = true;
-  if (isVisible && !isAnimated) {
+  //isImagesLoaded = true;
+  //if (isVisible && !isAnimated) {
+  //if (!isAnimated) {
     removeCover();
     animate();
-  }//end if
+  //}//end if
 }//end if
 
 
@@ -101,22 +134,6 @@ function imgpreload(imgs, callback) {
 
 
 /*
-*  Controller Function for the addition of HTML/Text into the DOM.
-*  
-*  @param adContent: The Enabler object with dynamic content that is passed in.
-*  @return:          This function does not return anything.
-*
-*  EXAMPLE USE:
-*  In setText(adContent) function: addText(adContent.price2Text, adContent.price2Element); - add as many of these lines as required.
-*  In politeInit() function:     setText(adContent); - only needs to be called once, setText(adContent) needs to be populated.
-*
-*/
-function setText(adContent){
-  //addText(adContent.text, adContent.textID);
-}//end setText(adContent)
-
-
-/*
 *  Injects plain text or HTML to be placed inside an HTML Element in the DOM.
 *  
 *  @param text:    The text/HTML (string) to be added.
@@ -139,6 +156,28 @@ function addText(text, element) {//move out of this function
 function removeCover() {
   return document.getElementById('covering-div').className = 'hide';
 }//end removeCover()
+
+
+
+//////  //////  //////  //////  //////  //////  //////  //////
+//////  //////  ANYTHING BELOW CAN BE EDITED    //////  //////
+//////  //////  //////  //////  //////  //////  //////  //////
+
+
+/*
+*  Controller Function for the addition of HTML/Text into the DOM.
+*  
+*  @param adContent: The Enabler object with dynamic content that is passed in.
+*  @return:          This function does not return anything.
+*
+*  EXAMPLE USE:
+*  In setText(adContent) function: addText(adContent.price2Text, adContent.price2Element); - add as many of these lines as required.
+*  In politeInit() function:     setText(adContent); - only needs to be called once, setText(adContent) needs to be populated.
+*
+*/
+function setText(adContent){
+  //addText(adContent.text, adContent.textID);
+}//end setText(adContent)
 
 
 /*
@@ -185,7 +224,7 @@ function imageMap(adContent){
 *
 */
 function animate() {  
-  isAnimated = true;//required
+  //isAnimated = true;//required
 
   // For 5 seconds, show frame 1
   TweenLite.to(document.getElementById('frame1'), 0.4, { delay: 5, ease: 'easeInOut', opacity: 0 });

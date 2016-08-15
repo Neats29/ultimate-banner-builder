@@ -30,26 +30,27 @@ function initialize() {
 *  @return: This function does not return anything.
 *
 */
-function politeInit() {
+// function politeInit() {
+//   //isVisible = true;//required for onImagesLoaded
 
-  //////  Get Content  //////
-  var adContent = getContent();
-  var imgMap = imageMap(adContent);
+//   //////  Get Content  //////
+//   var adContent = getContent();
+//   var imgMap = imageMap(adContent);
 
-  //////  Set Content  //////
-  exitHandler( adContent );
-  setText( adContent );
-  setImages( imgMap );
+//   //////  Set Content  //////
+//   exitHandler( adContent );
+//   setText( adContent );
+//   setImages( imgMap );//required last function to be called.
 
-  //////  Start Animations  //////
-  /*
-  *  setImages has a call back when ready to "onImagesLoaded" in "imgpreload(images, onImagesLoaded)" - found in main.js
-  *  onImagesLoaded will run the last two functions required:
-  *    - removeCover();
-  *    - animate();
-  */
+//   //////  Start Animations  //////
+//   /*
+//   *  setImages has a call back when ready to "onImagesLoaded" in "imgpreload(images, onImagesLoaded)" - found in main.js
+//   *  onImagesLoaded will run the last two functions required:
+//   *    - removeCover();
+//   *    - animate();
+//   */
 
-}//end politeInit()
+// }//end politeInit()
 
 
 /*
@@ -64,14 +65,10 @@ function exitHandler(adContent) {
   var element = document.getElementById('bg-exit');
 
   if (element.addEventListener) {//For all major browsers, except IE 8 and earlier
-      element.addEventListener("click", function() {
-        window.open(adContent.exit.Url, '_blank');
-      });
+      element.addEventListener("click", function() { window.open(adContent.exit.Url, '_blank'); });
   }//end if
   else if (element.attachEvent) {//For IE 8 and earlier versions
-      element.attachEvent("onclick", function() {
-        window.open(adContent.exit.Url, '_blank');
-      });
+      element.attachEvent("onclick", function() { window.open(adContent.exit.Url, '_blank'); });
   }//end else
 
 }//end exitHandler()
