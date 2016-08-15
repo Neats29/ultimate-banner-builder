@@ -213,20 +213,26 @@ function getContent() {
   var devDynamicContent = {};
   devDynamicContent.dynContent= [{}];
   devDynamicContent.dynContent[0]._id = 0;
+
   devDynamicContent.dynContent[0].main_image = {};
   devDynamicContent.dynContent[0].main_image.Type = "file";
   devDynamicContent.dynContent[0].main_image.Url = "http://www.nisbets.co.uk/asset/en/prodimage/medium/cg928-werzalit-square-table-top-dark-red-600mm.jpg";
+  
   devDynamicContent.dynContent[0].image_url_1 = {};
   devDynamicContent.dynContent[0].image_url_1.Type = "file";
   devDynamicContent.dynContent[0].image_url_1.Url = "http://www.continentalsports.co.uk/documents/images/laminate/E17-52.jpg";
+  
   devDynamicContent.dynContent[0].image_url_2 = {};
   devDynamicContent.dynContent[0].image_url_2.Type = "file";
   devDynamicContent.dynContent[0].image_url_2.Url = "http://test.adv-furniture.co.uk/wordpress/wp-content/uploads/2013/02/Green.jpg";
   devDynamicContent.dynContent[0].image_url_3 = {};
   devDynamicContent.dynContent[0].image_url_3.Type = "file";
   devDynamicContent.dynContent[0].image_url_3.Url = "http://www.ralcolours.co.uk/acatalog/ral1007.jpg";
+  
   devDynamicContent.dynContent[0].exit = {};
   devDynamicContent.dynContent[0].exit.Url = "http://www.google.com/";
+
+  devDynamicContent.dynContent[0].exit1 = "http://www.google.com/";
 
   /* End of code to be replaced */
 
