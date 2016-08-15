@@ -1,11 +1,5 @@
 "use strict";
 
-//////  GLOBAL VARS  //////
-//var isAdLoaded = false;//not found in current main
-//var isAnimated = false;
-//var isVisible = false;
-//var isImagesLoaded = false;
-
 //Sets initialize() to run so Script can start.
 //initialize() is found in both doubleClick.js and static.js
 if('onload' in window){
@@ -17,25 +11,6 @@ else{
     initialize();
   }, 1000);
 }//end if
-
-
-/*
-*  Starts the advertisement when images are loaded and no aminations have been run yet.
-*  Called when the ad is visibile in the browser.
-*  
-*  @param:  This function does not take any arguments.
-*  @return: This function does not return anything.
-*
-*/
-/*
-function onVisible() {
-  isVisible = true;
-  if (isImagesLoaded && !isAnimated) {
-    removeCover();
-    animate();
-  }
-}
-*/
 
 
 /*
@@ -69,7 +44,7 @@ function politeInit() {
 
 
 /*
-*  Starts the advertisement when it is visible and no aminations have been run yet.
+*  Starts the advertisement aminations.
 *  Called when all images are loaded.
 *  
 *  @param:  This function does not take any arguments.
@@ -77,12 +52,8 @@ function politeInit() {
 *
 */
 function onImagesLoaded() {
-  //isImagesLoaded = true;
-  //if (isVisible && !isAnimated) {
-  //if (!isAnimated) {
     removeCover();
     animate();
-  //}//end if
 }//end if
 
 
@@ -264,14 +235,13 @@ function getContent() {
   devDynamicContent.dynContent[0].image_url_2 = {};
   devDynamicContent.dynContent[0].image_url_2.Type = "file";
   devDynamicContent.dynContent[0].image_url_2.Url = "http://test.adv-furniture.co.uk/wordpress/wp-content/uploads/2013/02/Green.jpg";
+
   devDynamicContent.dynContent[0].image_url_3 = {};
   devDynamicContent.dynContent[0].image_url_3.Type = "file";
   devDynamicContent.dynContent[0].image_url_3.Url = "http://www.ralcolours.co.uk/acatalog/ral1007.jpg";
   
   devDynamicContent.dynContent[0].exit = {};
   devDynamicContent.dynContent[0].exit.Url = "http://www.google.com/";
-
-  devDynamicContent.dynContent[0].exit1 = "http://www.google.com/";
 
   /* End of code to be replaced */
 
