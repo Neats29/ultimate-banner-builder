@@ -170,6 +170,27 @@ function setStyleSheet(adContent){
 
 
 /*
+*  Creates Exit link handlers
+*  
+*  @param adContent: The Enabler object with dynamic content that is passed in.
+*  @return:          This function does not return anything.
+*
+*/
+function exitHandler(adContent) {
+
+  var element = document.getElementById('bg-exit');
+
+  if (element.addEventListener) {//For all major browsers, except IE 8 and earlier
+      element.addEventListener("click", function() { window.open(adContent.exit.Url, '_blank'); });
+  }//end if
+  else if (element.attachEvent) {//For IE 8 and earlier versions
+      element.attachEvent("onclick", function() { window.open(adContent.exit.Url, '_blank'); });
+  }//end else
+
+}//end exitHandler(adContent)
+
+
+/*
 *  Contatins key:value map of images such that "Element ID : Dynamic Content Address"
 *  
 *  @param adContent: The Enabler object with dynamic content that is passed in.

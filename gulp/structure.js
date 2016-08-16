@@ -41,7 +41,8 @@ gulp.task('master', function (callback) {
 // Overwrite base-template files with approved Master adjustments.
 gulp.task('overwrite', function () {
   var sources = ['src/**/index.html', 'src/**/main.js', 'src/global.scss', 'src/normalize.scss', 'src/variables.scss'];
-  DoubleClick === true ? sources.push('src/**/doubleclick.js') : sources.push('src/**/image-paths.js');
+  //DoubleClick === true ? sources.push('src/**/doubleclick.js') : sources.push('src/**/image-paths.js');
+  DoubleClick === true ? sources.push('src/**/doubleclick.js');
 
   function copyScripts(source) {
     //css might be specific to the size of the master banner size, so keep a copy of it when overwriting base-template files in gulp master.
