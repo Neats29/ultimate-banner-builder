@@ -41,16 +41,14 @@
 - Edit the banner in the *src* folder to create the final working version of the Master banner size in *prod*. 
 
 ##### For DoubleClickbanners the only files which require editing are:
-  - *doubleclick.js*
-  - *index.html*
   - *main.js*
+  - *index.html*
   - *global.scss* 
   - *overwrite.scss*
 
 ##### For Static banners the only files which require editing are:
-  - *image-paths.js*
-  - *index.html*
   - *main.js*
+  - *index.html*
   - *global.scss* 
   - *overwrite.scss*
 

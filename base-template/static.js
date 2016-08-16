@@ -1,47 +1,23 @@
-'use strict';
-
-// Initialise variables
-var clickTag = "";
-
-// Begin animation after a time delay to allow for loading.
-function politeInit() {
-  setTimeout(function() {
-    exitHandler();
-    setImages();
-  }, 500);
-
-  setTimeout(function() {
-    removeCover();
-    animate();
-  }, 1000);
-}
-
-
-// Attach exit url to bg-exit element.
-function exitHandler() {
-  var dynamicContent = getContent();
-  var bgExit = document.getElementById('bg-exit');
-  var parent = bgExit.parentNode;
-  var anchor = document.createElement('a');
-  parent.replaceChild(anchor, bgExit);
-  anchor.appendChild(bgExit);
-
-  bgExit.addEventListener('click', function() {
-    if (clickTag === "") {
-      clickTag = dynamicContent.exit.Url;
-    }
-    anchor.setAttribute('target', '_blank');
-    anchor.setAttribute('href', clickTag);
-  });
-}
-
-
-// Wait for the DOM to load before initialising banner load.
+/*
+*  Initializer - actions when DOM is ready.
+*  
+*  @param:  This function does not take any arguments.
+*  @return: This function does not return anything.
+*
+*/
 function initialize() {
-  if (document.addEventListener) {
-    // For all major browsers, except IE 8 and earlier
-    document.addEventListener("DOMContentLoaded", politeInit);
-  } else {
-    politeInit();
-  }
-}
+
+    if (document.addEventListener) {//For all major browsers, except IE 8 and earlier
+        document.addEventListener("DOMContentLoaded", politeInit);
+    }//end if
+    else if (document.attachEvent) {//For IE 8 and earlier versions
+        document.attachEvent("onload", politeInit);
+    }//end else
+    else{
+        //in any other instance, run politeInit() with 1000ms delay to allow for loading
+        setTimeout(function() { 
+          politeInit();
+        }, 1000);
+    }//end else
+
+}//end initialize()
