@@ -23,7 +23,6 @@ function getFolders(dir) {
 }
 
 
-
 class GenerateTemplates {
 	constructor() {
 		this.loadSizes();
@@ -43,14 +42,15 @@ class GenerateTemplates {
     this.Dynamic = sizes.Dynamic;
     this.masterScssCopied = false;
 		versions = sizes.versions;
-		
+
 		versions = this.Master === true ? [versions[0]] : versions;
 		this.sizes = this.Master === true ? [this.sizes[0]] : this.sizes;
 	}
 
   isStatic() {
-    if (this.Master && this.Static && !this.DoubleClick ||
-      !this.Master && this.Static) return true;
+    if (this.Master && this.Static && !this.DoubleClick || !this.Master && this.Static) {
+      return true;
+    }
   }
 
 	processSizes() {
@@ -79,16 +79,24 @@ class GenerateTemplates {
 				console.error(chalk.red(`src could not be created`));
 			} else {
 				console.info(chalk.blue(`src has been created`));
-				that.populateSrc();
+			  fs.mkdirSync(sourceDirectory + '/_scss');
+        that.populateSrc();
 			}
 		});
 	}
 
+  // TODO: Import all global scss files into src/scss
 	populateSrc() {
-		let globalSass = `${appRoot}/base-template/global.scss`;
-		let normalizeSass = `${appRoot}/base-template/normalize.scss`;
-		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}global.scss`));
-		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}normalize.scss`));
+		let globalSass = `${appRoot}/base-template/scss/_objects.global.scss`;
+		let normalizeSass = `${appRoot}/base-template/scss/_generic.normalize.scss`;
+    let variableSass = `${appRoot}/base-template/scss/_variables.scss`;
+    let functionSass = `${appRoot}/base-template/scss/_tools.functions.scss`;
+    let helperSass = `${appRoot}/base-template/scss/_trumps.helpers.scss`;
+		fs.createReadStream(globalSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_objects.global.scss`));
+		fs.createReadStream(normalizeSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_generic.normalize.scss`));
+    fs.createReadStream(variableSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_variables.scss`));
+    fs.createReadStream(functionSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_tools.functions.scss`));
+    fs.createReadStream(helperSass).pipe(fs.createWriteStream(`${sourceDirectory}_scss/_trumps.helpers.scss`));
 		this.processSizes();
 	}
 
@@ -155,7 +163,7 @@ class GenerateTemplates {
 
 					    version++;
 
-					    if (version == totalVersions) {
+					    if (version === totalVersions) {
 					    	that.populateTemplate(dir, data); // Build files into folders when complete
 					    } else {
 					    	makeVersionDirectory(version); // Otherwise perform these tasks for each version
@@ -169,8 +177,11 @@ class GenerateTemplates {
 						var images = ['blue.jpg', 'green.jpg', 'orange.jpg', 'red.jpg'];
 
 						fse.copy(`${appRoot}/base-template/global-images`, `${dir}/${Static}/${versions[version]}/${img}`, (err) => {
-			      	if (err) return console.error("error:", err);
-			      	console.info(chalk.green("static images folder copied successfully."));
+			      	if (err) {
+                return console.error("error:", err);
+              }
+
+              console.info(chalk.green("static images folder copied successfully."));
 			      });
 					}
 
@@ -182,10 +193,10 @@ class GenerateTemplates {
 		});
 	}
 
-  // check for numberxnumber-overwite.scss, match the number and overwite the scss 
+  // check for numberxnumber-overwite.scss, match the number and overwite the scss
   //in that folder, then replace it with the default overwrite.scss in that folder - then delete from base template
   findEditedMasterScss() {
-    var masterScssRegx = /([0-9]+x[0-9]+)-overwrite\.scss/; 
+    var masterScssRegx = /([0-9]+x[0-9]+)-overwrite\.scss/;
     var test = fs.readdirSync('base-template').filter((file) => {
       if (masterScssRegx.test(file)) {
         masterScss = file;
@@ -230,8 +241,10 @@ class GenerateTemplates {
 
     if (!this.Dynamic && this.DoubleClick) {
       fse.copy(`${appRoot}/base-template/global-images`, `${dir}/${DoubleClick}/img`, (err) => {
-       if (err) return console.error("error:", err);
-       console.info(chalk.green("images folder copied successfully."));
+        if (err) {
+          return console.error("error:", err);
+        }
+        console.info(chalk.green("images folder copied successfully."));
       });
     }
 
@@ -268,9 +281,11 @@ class GenerateTemplates {
           break;
         case 'index.html':
         case 'overwrite.scss':
-        case 'image-paths.js': 
+        case 'image-paths.js':
           for (var version in versions) {
-            fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
+            if(versions.hasOwnProperty(version)) {
+              fs.writeFileSync(`${dir}/${Static}/${versions[version]}/${file}`, processedData, 'utf8');
+            }
           }
           break;
         case 'main.js':

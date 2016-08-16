@@ -1,5 +1,5 @@
 {
-  "dimensions": 
+  "dimensions":
   [
     {
       "width": 300,
@@ -13,7 +13,7 @@
     }
 
   ],
-  "versions": 
+  "versions":
   [
     "version1",
     "version2"

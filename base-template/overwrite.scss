@@ -1,25 +1,33 @@
-@import './global.scss';
-@import './normalize.scss';
+@import './_scss/variables';
+@import './_scss/tools.functions';
+@import './_scss/generic.normalize';
+@import './_scss/objects.global';
+@import './_scss/trumps.helpers';
 
 .banner {
   background-size: 100% 100% !important;
-  height: {{height}} + px;
-  width: {{width}} + px;
+  height: calculate-rem({{height}});
+  width: calculate-rem({{width}});
 }
 
 .banner-border {
+  border: calculate-rem(1px) solid $black;
+  height: calculate-rem({{height}} - 2);
   position: absolute;
-  height: {{height}} - 2 + px;
-  width: {{width}} - 2 + px;
-  border: 1px solid #000;
+  width: calculate-rem({{width}} - 2);
 }
 
 .full-dimension {
-  height: {{height}} + px;
-  width: {{width}} + px;
+  height: calculate-rem({{height}});
+  width: calculate-rem({{width}});
 }
 
 .slide-container {
-  height: {{height}} + px;
-  width: {{width}} + px;
+  height: calculate-rem({{height}});
+  width: calculate-rem({{width}});
 }
+
+
+/* ==========================================================================
+  ADD CODE BELOW THIS LINE.
+========================================================================== */
