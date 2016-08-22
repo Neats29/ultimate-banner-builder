@@ -29,6 +29,7 @@
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 9999;
 }
 
 #covering-div {
@@ -38,4 +39,5 @@
   top: 0;
   transition: opacity 1.2s ease;
   width: 100%;
+  z-index: 9998;
 }
