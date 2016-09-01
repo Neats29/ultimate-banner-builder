@@ -50,7 +50,6 @@ gulp.task('js-lint', function () {
   return gulp.src(_config.paths.js.src)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'));
 });
 
 
